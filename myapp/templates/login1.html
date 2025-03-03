@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Heart Attack Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h2 {
+            color: #333;
+        }
+        .input-container {
+            position: relative;
+            width: 100%;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        .input-container input {
+            padding-right: 40px;
+        }
+        .eye-icon {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+        }
+        button {
+            background: rgb(221, 33, 33);
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+        button:hover {
+            background: #cc0000;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Login</h2>
+        <form action="" method="POST">
+            {% csrf_token %}
+            <div class="input-container">
+                <input type="text" id="username" name="username" placeholder="Username" required pattern="[A-Za-z0-9_]{3,15}" title="Username should be 3-15 characters long and contain only letters, numbers, and underscores.">
+            </div>
+            <div class="input-container">
+                <input type="password" id="password" name="password" placeholder="Password" title="Password must be at least 6 characters long.">
+                <span class="eye-icon" >👁️</span>
+            </div>
+            <button type="submit">Login</button>
+        </form>
+        
+    </div>
+    <!-- <script>
+        function togglePassword() {
+            var passwordField = document.getElementById("password");
+            passwordField.type = passwordField.type === "password" ? "text" : "password";
+        }
+    
+        // onclick="togglePassword()" function handleLogin(event) {
+        //     event.preventDefault(); // Prevent form from actually submitting
+    
+        //     var username = document.getElementById("username").value;
+        //     var password = document.getElementById("password").value;
+    
+        //     // Simple authentication check (for now, just checking if fields are filled)
+        //     if (username && password) {
+        //         alert("Login successful! Redirecting to homepage...");
+        //         window.location.href = "/"; // Redirect to index page
+        //     } else {
+        //         alert("Invalid credentials! Please try again.");
+        //     }
+        // }
+    </script>  -->
+    
+</body>
+</html>

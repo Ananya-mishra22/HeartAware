@@ -1,0 +1,99 @@
+{% extends base_template %}
+{% load static %}
+{% block body %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Heart Attack Prediction</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: rgb(221, 33, 33);
+            padding: 15px 20px;
+        }
+        .navbar .logo {
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .navbar .menu {
+            display: flex;
+            align-items: center;
+        }
+        .navbar .menu a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 15px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .navbar .menu a:hover {
+            background-color: #f4c2c2;
+            border-radius: 5px;
+        }
+        .auth-buttons a {
+            background-color: white;
+            color: rgb(221, 33, 33);
+            padding: 10px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-left: 10px;
+            font-weight: bold;
+        }
+        .contact-container {
+            padding: 40px;
+            color:rgb(41, 3, 3)
+            text-align: center;
+        }
+        .contact-form {
+            max-width: 500px;
+            margin: auto;
+            background: #f4f4f4;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .contact-form button {
+            background: rgb(221, 33, 33);
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+        .contact-form button:hover {
+            background: #cc0000;
+        }
+    </style>
+</head>
+<body>
+    <div class="contact-container">
+        <h2 style="color: rgb(221, 33, 33); text-align: center;">Contact Us</h2>
+        <p style="color: rgb(221, 33, 33); text-align: center;">If you have any questions, feel free to reach out to us.</p>
+        <div class="contact-form">
+            <form>
+                <input type="text" name="name" placeholder="Your Name" required>
+                <input type="email" name="email" placeholder="Your Email" required>
+                <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
+{% endblock body %}

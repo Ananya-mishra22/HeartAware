@@ -1,0 +1,81 @@
+{% extends base_template %}
+{% load static %}
+
+{% block body %}
+<div class="container mt-5">
+    <h2 class="text-center">Personalized Recommendations</h2>
+
+    {% if results %}
+    <div class="alert alert-info text-center">
+        <h4>Your Latest Prediction: <strong>{{ results.prediction }}</strong></h4>
+        <p>Risk Level: <strong>{{ results.risk_level }}</strong></p>
+    </div>
+
+    <!-- Recommendations Section -->
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card p-3 shadow">
+                <h5 class="text-danger">Diet Recommendations</h5>
+                <ul>
+                    {% if results.risk_level == "High" %}
+                        <li>Reduce salt and sugar intake</li>
+                        <li>Eat more fresh fruits and vegetables</li>
+                        <li>Avoid processed and fried foods</li>
+                    {% elif results.risk_level == "Medium" %}
+                        <li>Maintain a balanced diet with lean proteins</li>
+                        <li>Include nuts and whole grains</li>
+                        <li>Stay hydrated</li>
+                    {% else %}
+                        <li>Maintain your healthy diet</li>
+                        <li>Continue eating fresh and natural foods</li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card p-3 shadow">
+                <h5 class="text-danger">Exercise & Fitness</h5>
+                <ul>
+                    {% if results.risk_level == "High" %}
+                        <li>Start with light physical activity (walking, yoga)</li>
+                        <li>Avoid strenuous exercises</li>
+                        <li>Consult a doctor before heavy workouts</li>
+                    {% elif results.risk_level == "Medium" %}
+                        <li>Engage in moderate exercises (brisk walking, cycling)</li>
+                        <li>Aim for 30 minutes of physical activity daily</li>
+                    {% else %}
+                        <li>Continue your regular workout routine</li>
+                        <li>Maintain an active lifestyle</li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card p-3 shadow">
+                <h5 class="text-danger">Lifestyle Changes</h5>
+                <ul>
+                    {% if results.risk_level == "High" %}
+                        <li>Avoid smoking and alcohol</li>
+                        <li>Manage stress through meditation</li>
+                        <li>Regular health checkups</li>
+                    {% elif results.risk_level == "Medium" %}
+                        <li>Maintain a healthy sleep schedule</li>
+                        <li>Control stress with relaxation techniques</li>
+                    {% else %}
+                        <li>Keep up your good habits!</li>
+                        <li>Regular health monitoring</li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    {% else %}
+    <div class="alert alert-warning text-center">
+        <p>No prediction results found. Please perform a test to get recommendations.</p>
+    </div>
+    {% endif %}
+</div>
+{% endblock body %}

@@ -1,0 +1,110 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login/Signup Form</title>
+    <link rel="stylesheet" href="{% static 'lstyle.css' %}">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+    {% if messages %}
+    <div id="message-box">
+        {% for message in messages %}
+            <p class="message">{{ message }}</p>
+        {% endfor %}
+    </div>
+{% endif %}
+    <div class="container">
+        
+        <div class="form-box login">
+            <form action="" method="POST">
+                {% csrf_token %}
+                <h1>Login</h1>
+                <div class="input-box">
+                    <input type="text" id="username" name="username" placeholder="Username" required pattern="[A-Za-z0-9_]{3,15}" title="Username should be 3-15 characters long and contain only letters, numbers, and underscores." required>
+                    <i class='bx bxs-user'></i>
+                </div>
+                <div class="input-box">
+                    <input type="password" id="password" name="password" placeholder="Password" title="Password must be at least 6 characters long.">
+                    <i class='bx bxs-lock-alt' ></i>
+                </div>
+                <div class="forgot-link">
+                    <a href="#">Forgot Password?</a>
+                </div>
+                <button type="submit" class="btn">Login</button>
+                <p>or login with social platforms</p>
+                <div class="social-icons">
+                    <a href="#"><i class='bx bxl-google' ></i></a>
+                    <a href="#"><i class='bx bxl-facebook' ></i></a>
+                    <a href="#"><i class='bx bxl-github' ></i></a>
+                    <a href="#"><i class='bx bxl-linkedin' ></i></a>
+                </div>
+            </form>
+        </div>
+
+        <div class="form-box register">
+            <form action="{% url 'signup' %}" method="POST">
+                {% csrf_token %}
+                <h1>Registration</h1>
+                <div class="input-box">
+                    <input type="text" name="username" placeholder="Username" required pattern="[A-Za-z0-9_]{3,15}" title="Username should be 3-15 characters long and contain only letters, numbers, and underscores." >
+                    <i class='bx bxs-user'></i>
+                </div>
+                <div class="input-box">
+                    <input type="email" name="email" placeholder="Email ID" name="email" required>
+                    <i class='bx bxs-envelope' ></i>
+                </div>
+                <div class="input-box">
+                    <input type="password" id="password" placeholder="Password" name="password1" required minlength="6" title="Password must be at least 6 characters long.">
+                    <i class='bx bxs-lock-alt' ></i>
+                </div>
+                <div class="input-box">
+                    <input type="password" id="confirm_password" name="password2" placeholder="Confirm Password" required minlength="6" title="Confirm Password must match the password.">
+                    <i class='bx bxs-lock-alt' ></i>
+                </div>
+                <button type="submit" class="btn">Register</button>
+                <p>or register with social platforms</p>
+                <div class="social-icons">
+                    <a href="#"><i class='bx bxl-google' ></i></a>
+                    <a href="#"><i class='bx bxl-facebook' ></i></a>
+                    <a href="#"><i class='bx bxl-github' ></i></a>
+                    <a href="#"><i class='bx bxl-linkedin' ></i></a>
+                </div>
+            </form>
+        </div>
+
+        <div class="toggle-box">
+            <div class="toggle-panel toggle-left">
+                <h1>Hello, Welcome!</h1>
+                <p>Don't have an account?</p>
+                <button class="btn register-btn">Register</button>
+            </div>
+
+            <div class="toggle-panel toggle-right">
+                <h1>Welcome Back!</h1>
+                <p>Already have an account?</p>
+                <button class="btn login-btn">Login</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="{% static 'main.js' %}">
+
+        document.addEventListener("DOMContentLoaded", function () {
+            setTimeout(function () {
+                let messageBox = document.getElementById("message-box");
+                if (messageBox) {
+                    messageBox.innerHTML = "<p class='message'>Redirecting...</p>"; // Change message
+                    setTimeout(() => {
+                        messageBox.style.display = "none"; // Hide after another 2 seconds
+                    }, 2000);
+                }
+            }, 5000);
+        });
+        
+        
+    </script>
+</body>
+</html>
