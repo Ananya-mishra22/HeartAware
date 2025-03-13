@@ -10,6 +10,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Navbar - Heart Attack Prediction</title>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v6.0.0-beta3/css/all.css">
     <style>
         body {
             margin: 0;
@@ -179,6 +180,331 @@ button.next { right: 10px; }
 
 .footer-links a:hover {
     text-decoration: underline;
+}
+
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Arial', sans-serif;
+}
+
+body {
+  background-color: #fff;
+  color: #333;
+  line-height: 1.6;
+}
+
+.features-section {
+  background-color: #fff1f1; /* Light red background */
+  padding: 80px 20px;
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+
+.features-section.visible {
+  opacity: 1;
+}
+
+.section-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Section Title */
+.section-title {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.section-title h2 {
+  font-size: 36px;
+  color: #b30000; /* Dark red */
+  margin-bottom: 15px;
+  font-weight: 700;
+}
+
+.section-title::after {
+  
+  display: block;
+  width: 80px;
+  height: 4px;
+  background-color: #e60000; /* Medium red */
+  margin: 0 auto;
+}
+
+/* Features Container */
+.features-container {
+  display: flex;
+  justify-content: center;
+  gap: 150px; /* Increases space between cards */
+}
+
+.feature-box {
+  flex: 0 1 calc(50% - 25px); /* Ensures cards have equal width with gap */
+  margin-bottom: 30px; /* Additional vertical spacing if needed */
+}
+
+@media (min-width: 768px) {
+  .features-container {
+      grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Feature Box */
+.feature-box {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.feature-box.fade-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.feature-box:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+/* Feature Header */
+.feature-header {
+  background-color: #e60000; /* Medium red */
+  color: white;
+  padding: 25px;
+}
+
+.feature-box:nth-child(2) .feature-header {
+  background-color: #e60000; /* Dark red for contrast */
+}
+
+.feature-header h3 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.feature-header p {
+  font-size: 16px;
+  opacity: 0.9;
+}
+
+/* Feature Body */
+.feature-body {
+  padding: 25px;
+}
+
+/* Feature Item */
+.feature-item {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 25px;
+  animation: fadeInRight 0.5s ease backwards;
+}
+
+.feature-item:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.feature-item:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.feature-item:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+/* Feature Icon */
+.feature-icon {
+  flex-shrink: 0;
+  width: 60px;
+  height: 60px;
+  background-color: #ffe6e6; /* Very light red */
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 15px;
+  color: #e60000; /* Medium red */
+  font-size: 22px;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.feature-box:nth-child(2) .feature-icon {
+  color: #e60000; /* Dark red */
+}
+
+.feature-item:hover .feature-icon {
+  transform: scale(1.1);
+  background-color: #ffcccc; /* Slightly darker on hover */
+}
+
+/* Feature Text */
+.feature-text h4 {
+  font-size: 18px;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+.feature-text p {
+  color: #666;
+  font-size: 15px;
+}
+
+/* Feature Action */
+.feature-action {
+  margin-top: 30px;
+  animation: fadeIn 0.8s ease 0.4s backwards;
+}
+
+.feature-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #e60000; /* Medium red */
+  color: white;
+  padding: 12px 25px;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  width: 100%;
+}
+
+.feature-btn::after {
+  content: "\f061"; /* Font Awesome arrow right icon */
+  font-family: "Font Awesome 6 Free";
+  margin-left: 10px;
+  font-weight: 900;
+}
+
+.feature-box:nth-child(2) .feature-btn {
+  background-color: #ff1a1a /* Dark red */
+}
+
+.feature-btn:hover {
+  background-color: #ff1a1a; /* Lighter red on hover */
+  transform: translateY(-2px);
+}
+
+.feature-box:nth-child(2) .feature-btn:hover {
+  background-color: #ff1a1a /* Slightly lighter dark red on hover */
+}
+
+@media (min-width: 768px) {
+  .feature-btn {
+      width: auto;
+  }
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+      opacity: 0;
+  }
+  to {
+      opacity: 1;
+  }
+}
+
+@keyframes fadeInRight {
+  from {
+      opacity: 0;
+      transform: translateX(-20px);
+  }
+  to {
+      opacity: 1;
+      transform: translateX(0);
+  }
+}
+
+.features-section {
+  background-color: #fff1f1; /* Light pink background */
+  width: 100vw; /* Full viewport width */
+  margin-left: calc(-50vw + 50%); /* Center the section */
+  position: relative; /* Ensure proper positioning */
+  padding: 100px 0; /* Vertical padding, remove horizontal padding */
+}
+
+.features-container {
+  max-width: 1200px; /* Or your preferred max-width */
+  margin: 0 auto; /* Center the container */
+  padding: 0 50px; /* Add horizontal padding to the container */
+}
+
+.feature-box .feature-header {
+  text-align: center; /* Center-align text horizontally */
+  padding: 20px 15px; /* Add some padding */
+}
+
+.feature-box .feature-header h3 {
+  margin-bottom: 10px; /* Space between title and description */
+}
+
+.feature-box .feature-header p {
+  color: #666; /* Slight gray for description text */
+  max-width: 500px; /* Limit width for better readability */
+  margin: 0 auto; /* Center the description */
+}
+
+.feature-box .feature-header p {
+  color: white; /* Change text color to white */
+  max-width: 500px; /* Limit width for better readability */
+  margin: 0 auto; /* Center the description */
+  opacity: 0.8; /* Optional: slightly soften the white for better visibility */
+} 
+
+.section-title {
+  text-align: center;
+  margin-bottom: 50px;
+  width: 100%;
+}
+
+.section-title h2 {
+  font-size: clamp(2.5rem, 5vw, 4rem); /* Larger, more dynamic size */
+  color: #ff0000; /* Vibrant red */
+  font-weight: 800; /* Extra bold */
+  font-family: 'Playfair Display', serif; /* Sophisticated serif font */
+  position: relative;
+  display: inline-block;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.2); /* Subtle depth */
+  background: linear-gradient(to right, #ff0000, #ff3333); /* Gradient effect */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.section-title h2::before {
+  content: '';
+  position: absolute;
+  width: 80%;
+  height: 3px;
+  bottom: -15px;
+  left: 10%;
+  background: linear-gradient(to right, #ff0000, #ff3333);
+  transform: scaleX(0);
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.section-title h2:hover::before {
+  transform: scaleX(1);
+}
+
+/* First box animation */
+.feature-box:nth-child(1) {
+  transition-delay: 0.2s;
+}
+
+/* Second box animation */
+.feature-box:nth-child(2) {
+  transition-delay: 0.4s;
 }
 
     
@@ -1250,14 +1576,103 @@ button.next { right: 10px; }
         </div>
       </section><!-- Closing div of slider -->
 
+
+
+
+
 <!-- Add Cards Below Slider -->
-<div class="card-container">
-  <div class="card"><img src="{% static 'heart2.png' %}" alt="Card 1"><h3>2D Echo</h3></div>
-  <div class="card"><img src="{% static 'heart2.png' %}" alt="Card 2"><h3>ECG</h3></div>
-  <div class="card"><img src="{% static 'heart2.png' %}" alt="Card 3"><h3>Blood Test</h3></div>
-  <div class="card"><img src="{% static 'heart2.png' %}" alt="Card 4"><h3>Treadmill Test</h3></div>
-  <div class="card"><img src="{% static 'heart2.png' %}" alt="Card 5"><h3>Lifestyle</h3></div>
-</div>
+<!-- Features Section -->
+<section class="features-section" id="features">
+  <div class="section-title">
+      <h2>Key Features</h2>
+  </div>
+  <div class="features-container">
+      <!-- Lifestyle Report Feature -->
+      <div class="feature-box fade-up">
+          <div class="feature-header">
+              <h3>Get Lifestyle Report</h3>
+              <p>Analyze your habits and receive personalized insights</p>
+          </div>
+          <div class="feature-body">
+              <div class="feature-item">
+                  <div class="feature-icon">
+                      <i class="fas fa-utensils"></i>
+                  </div>
+                  <div class="feature-text">
+                      <h4>Diet Analysis</h4>
+                      <p>Learn how your eating habits affect your heart health with personalized nutrition insights.</p>
+                  </div>
+              </div>
+              
+              <div class="feature-item">
+                  <div class="feature-icon">
+                      <i class="fas fa-dumbbell"></i>
+                  </div>
+                  <div class="feature-text">
+                      <h4>Activity Assessment</h4>
+                      <p>Get a comprehensive evaluation of your physical activity and its impact on cardiac health.</p>
+                  </div>
+              </div>
+              
+              <div class="feature-item">
+                  <div class="feature-icon">
+                      <i class="fas fa-brain"></i>
+                  </div>
+                  <div class="feature-text">
+                      <h4>Stress Monitoring</h4>
+                      <p>Understand how stress levels affect your heart and learn effective management techniques.</p>
+                  </div>
+              </div>
+              
+              <div class="feature-action">
+                  <a href="#" class="feature-btn">Generate Lifestyle Report</a>
+              </div>
+          </div>
+      </div>
+      
+      <!-- Report Assessment Feature -->
+      <div class="feature-box fade-up">
+          <div class="feature-header">
+              <h3>Get Report Assessment</h3>
+              <p>Upload medical reports for AI-powered risk analysis</p>
+          </div>
+          <div class="feature-body">
+              <div class="feature-item">
+                  <div class="feature-icon">
+                      <i class="fas fa-chart-line"></i>
+                  </div>
+                  <div class="feature-text">
+                      <h4>Data Interpretation</h4>
+                      <p>Our AI analyzes your lab results and medical reports to identify potential risk factors.</p>
+                  </div>
+              </div>
+              
+              <div class="feature-item">
+                  <div class="feature-icon">
+                      <i class="fas fa-calculator"></i>
+                  </div>
+                  <div class="feature-text">
+                      <h4>Risk Prediction</h4>
+                      <p>Advanced algorithms calculate your risk of cardiac events based on your health data.</p>
+                  </div>
+              </div>
+              
+              <div class="feature-item">
+                  <div class="feature-icon">
+                      <i class="fas fa-user-md"></i>
+                  </div>
+                  <div class="feature-text">
+                      <h4>Expert Recommendations</h4>
+                      <p>Receive doctor-reviewed suggestions for additional testing or preventive measures.</p>
+                  </div>
+              </div>
+              
+              <div class="feature-action">
+                  <a href="reports" class="feature-btn">Upload Medical Reports</a>
+              </div>
+          </div>
+      </div>
+  </div>
 <!-- End of Cards -->
 
 
@@ -1276,6 +1691,48 @@ button.next { right: 10px; }
     }
 
     setInterval(() => moveSlide(1), 5000); // Auto-slide every 3s
+
+    document.addEventListener('DOMContentLoaded', function() {
+      // Make section visible
+      const featuresSection = document.querySelector('.features-section');
+      setTimeout(function() {
+          featuresSection.classList.add('visible');
+      }, 100);
+      
+      // Reveal feature boxes on scroll
+      const featureBoxes = document.querySelectorAll('.feature-box');
+      
+      function checkScroll() {
+          featureBoxes.forEach(function(box) {
+              const boxTop = box.getBoundingClientRect().top;
+              const triggerPosition = window.innerHeight * 0.85;
+              
+              if (boxTop < triggerPosition) {
+                  box.classList.add('fade-in');
+              }
+          });
+      }
+      
+      // Check positions on load
+      setTimeout(checkScroll, 300);
+      
+      // Check positions on scroll
+      window.addEventListener('scroll', checkScroll);
+      
+      // Add hover effects for feature items
+      const featureItems = document.querySelectorAll('.feature-item');
+      featureItems.forEach(function(item) {
+          item.addEventListener('mouseenter', function() {
+              const icon = this.querySelector('.feature-icon');
+              icon.style.transform = 'scale(1.1)';
+          });
+          
+          item.addEventListener('mouseleave', function() {
+              const icon = this.querySelector('.feature-icon');
+              icon.style.transform = 'scale(1)';
+          });
+      });
+  });
 </script>
 </body>
 </html>
