@@ -32,5 +32,7 @@ urlpatterns = [
     path('logout',logout_view,name='logout'),
     path('history',history,name='history'),
     path('recommendations',recommendations,name='recommendations'),
+    path('2decho', predict_view, name='predict'),
+    path('wpr_form', calculate_wpr, name='calculate_wpr'),
 
 ]

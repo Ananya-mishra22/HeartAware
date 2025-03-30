@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WPR Prediction</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin: 50px; }
+        form { margin: 20px auto; width: 300px; }
+        input, button { display: block; width: 100%; padding: 10px; margin-top: 10px; }
+        .result { font-weight: bold; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <h2>🩸 WPR-Based Heart Attack Prediction</h2>
+    <form method="post">
+        {% csrf_token %}
+        <label for="wbc_count">White Blood Cell Count (WBC) in cells/µL:</label>
+        <input type="number" name="wbc_count" required>
+
+        <label for="platelet_count">Platelet Count (PLT) in cells/µL:</label>
+        <input type="number" name="platelet_count" required>
+
+        <button type="submit">Predict Risk</button>
+    </form>
+
+    {% if result %}
+        <div class="result">{{ result }}</div>
+    {% endif %}
+</body>
+</html>

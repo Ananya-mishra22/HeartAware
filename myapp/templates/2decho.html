@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cardiac Arrest Risk Prediction</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin: 50px; }
+        form { display: inline-block; text-align: left; background: #f9f9f9; padding: 20px; border-radius: 10px; }
+        input, select { width: 100%; padding: 10px; margin: 5px 0; border: 1px solid #ccc; }
+        button { background: #28a745; color: white; padding: 10px 15px; border: none; cursor: pointer; }
+        button:hover { background: #218838; }
+    </style>
+</head>
+<body>
+
+    <h2>Cardiac Arrest Risk Prediction 🫀</h2>
+    <form method="POST">
+        {% csrf_token %}
+        <label>Ejection Fraction (%)</label>
+        <input type="number" name="ejection_fraction" required>
+
+        <label>Left Ventricular End-Diastolic Diameter (mm)</label>
+        <input type="number" name="lv_edd" required>
+
+        <label>Pulmonary Artery Pressure (mmHg)</label>
+        <input type="number" name="pap" required>
+
+        <label>Mitral Valve Regurgitation</label>
+        <select name="mitral_regurgitation">
+            <option value="None">None</option>
+            <option value="Mild">Mild</option>
+            <option value="Moderate">Moderate</option>
+            <option value="Severe">Severe</option>
+        </select>
+
+        <label>Pericardial Effusion</label>
+        <select name="pericardial_effusion">
+            <option value="Absent">Absent</option>
+            <option value="Present">Present</option>
+        </select>
+
+        <button type="submit">Predict</button>
+    </form>
+
+    {% if result %}
+        <h3>Prediction Result:</h3>
+        <p><strong>{{ result }}</strong></p>
+    {% endif %}
+
+</body>
+</html>
