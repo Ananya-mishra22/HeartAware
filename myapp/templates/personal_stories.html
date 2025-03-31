@@ -1,0 +1,643 @@
+{% extends base_template %}
+{% load static %}
+{% block body %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stories From The Heart - Personal Journeys with Heart Disease</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Playfair+Display:wght@400;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Poppins', Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f4f4;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Enhanced Header */
+        header {
+            padding: 6rem 0 5rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, rgba(221, 33, 33, 0.9), rgba(255, 99, 99, 0.8)),
+                        url('https://cdnjs.cloudflare.com/ajax/libs/simple-icons/3.0.1/heart.svg') no-repeat center/cover;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 70%);
+            animation: heartbeat 2s infinite ease-in-out;
+            pointer-events: none;
+        }
+
+        @keyframes heartbeat {
+            0% { transform: scale(0.8); opacity: 0; }
+            50% { transform: scale(1.2); opacity: 0.3; }
+            100% { transform: scale(0.8); opacity: 0; }
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 3.5rem;
+            font-weight: 700;
+            font-family: 'Playfair Display', serif;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            position: relative;
+            letter-spacing: -0.5px;
+        }
+
+        header p {
+            margin: 1rem 0 0;
+            font-size: 1.4rem;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 400;
+            color: #fff;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Header decoration */
+        .header-decoration {
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            fill: #f8f4f4;
+            transform: translateY(1px);
+        }
+
+        /* Main Content */
+        main {
+            padding: 3rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        /* Floating heart decorations */
+        .floating-heart {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            opacity: 0.15;
+            z-index: -1;
+            animation: float 8s infinite ease-in-out;
+        }
+
+        .heart-1 {
+            top: 10%;
+            left: 5%;
+            animation-delay: 0s;
+            transform: rotate(-15deg);
+        }
+
+        .heart-2 {
+            top: 35%;
+            right: 7%;
+            animation-delay: 2s;
+            transform: rotate(20deg);
+        }
+
+        .heart-3 {
+            bottom: 15%;
+            left: 8%;
+            animation-delay: 4s;
+            transform: rotate(5deg);
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0) rotate(-15deg); }
+            50% { transform: translateY(-20px) rotate(0deg); }
+            100% { transform: translateY(0) rotate(-15deg); }
+        }
+
+        h2 {
+            color: rgb(221, 33, 33);
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            position: relative;
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+        }
+
+        h2::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(to right, rgb(221, 33, 33), rgb(255, 99, 99));
+            margin: 0.8rem auto 0;
+            border-radius: 2px;
+        }
+
+        /* Story card styles */
+        .story-card {
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            margin-bottom: 2.5rem;
+            overflow: hidden;
+            position: relative;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        @media (min-width: 768px) {
+            .story-card {
+                flex-direction: row;
+                min-height: 300px;
+            }
+        }
+
+        .story-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .story-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(to bottom, rgb(221, 33, 33), rgb(255, 99, 99));
+        }
+
+        .story-image {
+            flex: 0 0 35%;
+            background-color: #eee;
+            background-position: center;
+            background-size: cover;
+            min-height: 200px;
+        }
+
+        @media (max-width: 767px) {
+            .story-image {
+                min-height: 250px;
+            }
+        }
+
+        .story-content {
+            padding: 2.5rem 2rem;
+            position: relative;
+            z-index: 1;
+            flex: 1;
+        }
+
+        .story-card h3 {
+            margin: 0 0 1.2rem;
+            color: rgb(221, 33, 33);
+            font-size: 1.7rem;
+            font-weight: 700;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .story-card p {
+            margin: 0 0 1.2rem;
+            font-size: 1.1rem;
+            color: #555;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 400;
+            line-height: 1.8;
+        }
+
+        .story-card .story-tag {
+            display: inline-block;
+            background-color: rgb(221, 33, 33);
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .story-card .story-quote {
+            font-style: italic;
+            position: relative;
+            padding-left: 20px;
+            border-left: 3px solid rgba(221, 33, 33, 0.5);
+            margin: 1.5rem 0;
+            color: #666;
+        }
+
+        .read-more {
+            display: inline-block;
+            color: rgb(221, 33, 33);
+            font-weight: 600;
+            text-decoration: none;
+            border-bottom: 2px solid transparent;
+            transition: border-color 0.3s;
+            margin-top: 0.5rem;
+        }
+
+        .read-more:hover {
+            border-color: rgb(221, 33, 33);
+        }
+
+        /* Introduction box */
+        .intro-box {
+            background: linear-gradient(135deg, rgba(46, 125, 50, 0.1), rgba(76, 175, 80, 0.2));
+            border-left: 5px solid #2e7d32;
+            padding: 1.5rem 2rem;
+            border-radius: 8px;
+            margin: 0 0 3rem 0;
+        }
+
+        .intro-box strong {
+            display: block;
+            color: #2e7d32;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Call to share box */
+        .share-box {
+            background: linear-gradient(135deg, rgba(221, 33, 33, 0.1), rgba(255, 99, 99, 0.2));
+            border-left: 5px solid rgb(221, 33, 33);
+            padding: 1.5rem 2rem;
+            border-radius: 8px;
+            margin: 3rem 0;
+            text-align: center;
+        }
+
+        .share-box strong {
+            display: block;
+            color: rgb(221, 33, 33);
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+        }
+
+        .share-box p {
+            margin-bottom: 1.5rem;
+        }
+
+        /* Share story button */
+        .share-button {
+            display: inline-block;
+            background: rgb(221, 33, 33);
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+            text-decoration: none;
+        }
+
+        .share-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            text-decoration: none;
+            color: white;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 3rem 1.5rem 2rem;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, rgb(221, 33, 33), rgb(255, 99, 99));
+            color: #fff;
+            margin-top: 5rem;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 400;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 15px;
+            background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.5) 50%, rgba(255,255,255,0) 100%);
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        /* Back to Home button */
+        .back-button {
+            display: inline-block;
+            background: rgb(221, 33, 33);
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-top: 2rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+            text-decoration: none;
+        }
+
+        .back-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            text-decoration: none;
+            color: white;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            header h1 {
+                font-size: 3rem;
+            }
+            
+            header p {
+                font-size: 1.2rem;
+            }
+            
+            h2 {
+                font-size: 2.2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 5rem 1rem 4rem;
+            }
+            
+            header h1 {
+                font-size: 2.5rem;
+            }
+
+            header p {
+                font-size: 1.1rem;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+
+            main {
+                padding: 2rem 1.5rem;
+            }
+            
+            .story-content {
+                padding: 2rem 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 2.2rem;
+            }
+            
+            header p {
+                font-size: 1rem;
+            }
+            
+            h2 {
+                font-size: 1.8rem;
+            }
+            
+            .story-card h3 {
+                font-size: 1.5rem;
+            }
+            
+            .story-card p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Stories From The Heart</h1>
+        <p>Real journeys of survival, recovery and hope</p>
+        <!-- Wave decoration -->
+        <svg class="header-decoration" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 100" preserveAspectRatio="none">
+            <path d="M0,0 C150,40 350,50 500,20 C650,0 750,40 900,80 C1050,120 1350,40 1440,30 L1440,100 L0,100 Z"></path>
+        </svg>
+    </header>
+
+    <main>
+        <!-- Floating decorative hearts -->
+        <svg class="floating-heart heart-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z" fill="#dd2121"/>
+        </svg>
+        <svg class="floating-heart heart-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z" fill="#dd2121"/>
+        </svg>
+        <svg class="floating-heart heart-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z" fill="#dd2121"/>
+        </svg>
+
+        <a href="blogs" class="back-button">
+            <span class="back-icon">←</span> Back to blogs
+        </a>
+
+        <div class="intro-box">
+            <strong>About These Stories</strong>
+            <p>Each story shared here represents someone's real journey with heart disease or stroke. These personal accounts showcase the strength of the human spirit and the importance of awareness, prevention, and timely medical care. We hope these stories inspire you and remind us all that behind every statistic is a real person with a powerful story to tell.</p>
+        </div>
+
+        <h2>Personal Heart Journeys</h2>
+        
+        <div class="story-card">
+            <div class="story-image" style="background-image: url('/api/placeholder/500/500');"></div>
+            <div class="story-content">
+                <span class="story-tag">SURVIVOR STORY</span>
+                <h3>Michael's Wake-Up Call at 42</h3>
+                <p>Michael Johnson never thought heart disease would affect him. As a busy executive and father of three, he maintained what he thought was a healthy lifestyle despite the occasional fast food and missed workouts.</p>
+                <div class="story-quote">
+                    "The chest pain started while I was playing basketball with my son. I thought it was just indigestion, but when my left arm went numb, I knew something was wrong."
+                </div>
+                <p>Michael suffered a major heart attack at 42. Thanks to his son's quick thinking in calling 911, he survived. After surgery and cardiac rehabilitation, Michael has transformed his lifestyle and now advocates for heart health awareness in his community.</p>
+                <a href="#" class="read-more">Read Michael's full story →</a>
+            </div>
+        </div>
+
+        <div class="story-card">
+            <div class="story-image" style="background-image: url('/api/placeholder/500/500');"></div>
+            <div class="story-content">
+                <span class="story-tag">SURVIVOR STORY</span>
+                <h3>Sarah's Pregnancy Heart Complication</h3>
+                <p>When Sarah Williams became pregnant with her second child, she was thrilled. But during her third trimester, she developed peripartum cardiomyopathy, a rare form of heart failure that occurs during pregnancy or immediately after delivery.</p>
+                <div class="story-quote">
+                    "I was so focused on my baby's health that I ignored the swelling and shortness of breath, thinking it was just part of pregnancy. I nearly waited too long."
+                </div>
+                <p>Sarah's story highlights the importance of listening to your body and understanding that heart disease can affect women during pregnancy. After receiving proper treatment, Sarah delivered a healthy baby girl and continues to monitor her heart health closely.</p>
+                <a href="#" class="read-more">Read Sarah's full story →</a>
+            </div>
+        </div>
+
+        <div class="story-card">
+            <div class="story-image" style="background-image: url('/api/placeholder/500/500');"></div>
+            <div class="story-content">
+                <span class="story-tag">CAREGIVER STORY</span>
+                <h3>Robert's Journey as a Caregiver</h3>
+                <p>When Robert's wife Elaine suffered a severe stroke at 58, their lives changed instantly. From hospital stays to rehabilitation sessions, Robert found himself in a new role as a full-time caregiver.</p>
+                <div class="story-quote">
+                    "I went from being her husband to being her caregiver overnight. It was the hardest job I've ever had, but also the most important."
+                </div>
+                <p>Robert's story offers insights into the challenges and rewards of caring for a loved one after a stroke. Through support groups and community resources, Robert found the strength to provide the care Elaine needed while also taking care of his own health.</p>
+                <a href="#" class="read-more">Read Robert's full story →</a>
+            </div>
+        </div>
+
+        <div class="story-card">
+            <div class="story-image" style="background-image: url('/api/placeholder/500/500');"></div>
+            <div class="story-content">
+                <span class="story-tag">CONGENITAL HEART DEFECT</span>
+                <h3>Emma's Lifelong Heart Journey</h3>
+                <p>Emma Wilson was born with a congenital heart defect that required her first surgery when she was just 3 days old. Throughout her childhood, she underwent multiple surgeries and faced limitations that other children didn't.</p>
+                <div class="story-quote">
+                    "Growing up, I couldn't run as fast or play as long as other kids. But I learned early on that having a different heart just meant I had to find different ways to be strong."
+                </div>
+                <p>Now 25, Emma has become an advocate for children with congenital heart defects. Her story showcases the resilience of those born with heart conditions and the advances in medical care that have helped her live a full life despite early challenges.</p>
+                <a href="#" class="read-more">Read Emma's full story →</a>
+            </div>
+        </div>
+
+        <div class="story-card">
+            <div class="story-image" style="background-image: url('/api/placeholder/500/500');"></div>
+            <div class="story-content">
+                <span class="story-tag">STROKE SURVIVOR</span>
+                <h3>David's Stroke at 35</h3>
+                <p>As a marathon runner and health enthusiast, David Chen never imagined he would suffer a stroke at 35. But a rare arterial dissection caused by a neck injury during weightlifting led to a stroke that affected his right side.</p>
+                <div class="story-quote">
+                    "I went from running marathons to struggling to walk across a room. But I applied the same determination to my recovery that I used to apply to my training."
+                </div>
+                <p>David's journey through rehabilitation shows that stroke can affect anyone, regardless of age or fitness level. His story highlights the warning signs of stroke and the importance of immediate medical attention. Three years later, David has returned to running and now coaches other stroke survivors in fitness recovery.</p>
+                <a href="#" class="read-more">Read David's full story →</a>
+            </div>
+        </div>
+
+        <div class="story-card">
+            <div class="story-image" style="background-image: url('/api/placeholder/500/500');"></div>
+            <div class="story-content">
+                <span class="story-tag">FAMILY HISTORY</span>
+                <h3>The Johnsons: Three Generations of Heart Disease</h3>
+                <p>For the Johnson family, heart disease has been a generational challenge. After losing her grandfather and father to heart attacks, Maria Johnson took a proactive approach to her family's heart health.</p>
+                <div class="story-quote">
+                    "When my father died at 52, just like his father before him, I realized our family needed to break this cycle."
+                </div>
+                <p>Maria's story shows how understanding your family history can empower you to make different choices. Through genetic testing, preventive care, and lifestyle changes, Maria and her siblings are working to write a different heart story for their children.</p>
+                <a href="#" class="read-more">Read the Johnsons' full story →</a>
+            </div>
+        </div>
+
+        <div class="share-box">
+            <strong>Share Your Heart Story</strong>
+            <p>Every story shared helps raise awareness and may inspire someone else facing a similar journey. If you have experienced heart disease or stroke — as a patient, survivor, or caregiver — we invite you to share your story with our community.</p>
+            <a href="#" class="share-button">Share Your Story</a>
+        </div>
+    </main>
+
+    
+
+    <script>
+        // GSAP Animations
+        gsap.from("header h1", {
+            opacity: 0,
+            y: -50,
+            duration: 1.2,
+            delay: 0.3,
+            ease: "power3.out",
+        });
+
+        gsap.from("header p", {
+            opacity: 0,
+            y: -30,
+            duration: 1.2,
+            delay: 0.6,
+            ease: "power3.out",
+        });
+
+        gsap.from(".back-button", {
+            opacity: 0,
+            y: 30,
+            duration: 1,
+            delay: 1,
+            ease: "power3.out",
+        });
+
+        gsap.from(".intro-box", {
+            opacity: 0,
+            y: 30,
+            duration: 1,
+            delay: 1.2,
+            ease: "power3.out",
+        });
+
+        gsap.from("h2", {
+            opacity: 0,
+            y: -20,
+            duration: 1,
+            delay: 1.4,
+            stagger: 0.3,
+            ease: "power3.out",
+        });
+
+        gsap.from(".story-card", {
+            opacity: 0,
+            y: 30,
+            duration: 1,
+            stagger: 0.15,
+            delay: 1.6,
+            ease: "power3.out",
+        });
+
+        gsap.from(".share-box", {
+            opacity: 0,
+            y: 30,
+            duration: 1,
+            delay: 2.2,
+            ease: "power3.out",
+        });
+
+        gsap.from(".floating-heart", {
+            opacity: 0,
+            scale: 0,
+            duration: 1,
+            stagger: 0.3,
+            delay: 2.4,
+            ease: "elastic.out(1, 0.3)",
+        });
+        
+        // Animate the wave on scroll
+        window.addEventListener('scroll', function() {
+            let scrollPosition = window.scrollY;
+            if (scrollPosition < 500) {
+                gsap.to(".header-decoration", {
+                    y: 1 + (scrollPosition * 0.05),
+                    duration: 0.3,
+                    ease: "power1.out"
+                });
+            }
+        });
+    </script>
+</body>
+</html>
+{% endblock body %}

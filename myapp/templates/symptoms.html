@@ -7,7 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog - Cardiac Health</title>
+    <title>Symptoms of Cardiac Arrest</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Playfair+Display:wght@400;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
     <style>
@@ -89,7 +89,7 @@
         /* Main Content */
         main {
             padding: 3rem 2rem;
-            max-width: 1200px;
+            max-width: 1000px;
             margin: 0 auto;
             position: relative;
         }
@@ -151,137 +151,120 @@
             border-radius: 2px;
         }
 
-        /* Category List */
-        .category-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2.5rem;
+        h3 {
+            color: rgb(221, 33, 33);
+            font-size: 1.8rem;
+            margin: 2rem 0 1.5rem;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
         }
 
-        .category-card {
+        /* Content card */
+        .content-card {
             background: #fff;
             border-radius: 16px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-            text-decoration: none;
-            color: #333;
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
             overflow: hidden;
+            padding: 2.5rem;
+            margin-bottom: 3rem;
             position: relative;
             border: 1px solid rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .category-card:hover {
-            transform: scale(1.08) translateY(-10px); /* Added upward movement to zoom */
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        .content-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
         }
 
-        .category-card::before {
-            content: '';
+        /* Image styling */
+        .hero-image {
+            width: 100%;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .hero-image:hover {
+            transform: scale(1.02);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Symptoms list */
+        .symptoms-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 2rem 0;
+        }
+
+        .symptom-item {
+            display: flex;
+            align-items: center;
+            background: linear-gradient(to right, rgba(255, 99, 99, 0.05), rgba(255, 255, 255, 0));
+            padding: 1.2rem 1.5rem;
+            margin-bottom: 1rem;
+            border-radius: 10px;
+            border-left: 4px solid rgb(221, 33, 33);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .symptom-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.07);
+        }
+
+        .symptom-icon {
+            color: rgb(221, 33, 33);
+            margin-right: 1rem;
+            font-size: 1.5rem;
+            min-width: 30px;
+            text-align: center;
+        }
+
+        .symptom-text {
+            font-size: 1.2rem;
+            color: #444;
+            font-weight: 500;
+        }
+
+        /* Videos section */
+        .video-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .video-wrapper:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .video-wrapper iframe {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, rgba(221, 33, 33, 0.1), rgba(255, 99, 99, 0.2));
-            opacity: 0;
-            transition: opacity 0.4s ease;
+            border: none;
+            border-radius: 12px;
         }
 
-        .category-card:hover::before {
-            opacity: 1;
-        }
-
-        .category-content {
-            padding: 2.5rem 2rem;
-            text-align: center;
-            position: relative;
-            z-index: 1;
-        }
-
-        .category-content h3 {
-            margin: 0 0 1.2rem;
-            color: rgb(221, 33, 33);
-            font-size: 1.7rem;
-            font-weight: 700;
-            font-family: 'Poppins', sans-serif;
-            transition: transform 0.3s ease, color 0.3s ease;
-            position: relative;
-            display: inline-block;
-        }
-
-        .category-content h3::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 50%;
-            width: 0;
-            height: 2px;
-            background: rgb(221, 33, 33);
-            transition: width 0.3s ease, left 0.3s ease;
-        }
-
-        .category-card:hover .category-content h3::after {
-            width: 100%;
-            left: 0;
-        }
-
-        .category-card:hover .category-content h3 {
-            transform: translateY(-5px);
-            color: rgb(180, 20, 20);
-        }
-
-        .category-content p {
-            margin: 0;
-            font-size: 1.1rem;
-            color: #555;
-            opacity: 0.9;
-            font-family: 'Roboto', sans-serif;
-            font-weight: 400;
-            line-height: 1.8;
-            transition: transform 0.3s ease, opacity 0.3s ease;
-        }
-
-        .category-card:hover .category-content p {
-            opacity: 1;
-            transform: translateY(-3px);
-        }
-
-        .category-icon {
-            font-size: 3rem;
-            color: rgb(221, 33, 33);
-            margin-bottom: 1.2rem;
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), color 0.3s ease;
-            display: inline-block;
-            position: relative;
-        }
-
-        .category-icon::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 60px;
-            height: 60px;
-            background: rgba(221, 33, 33, 0.1);
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-            z-index: -1;
-            transition: background-color 0.3s ease, transform 0.3s ease;
-        }
-
-        .category-card:hover .category-icon::after {
-            transform: translate(-50%, -50%) scale(1.2);
-            background: rgba(221, 33, 33, 0.2);
-        }
-
-        .category-card:hover .category-icon {
-            transform: scale(1.2) rotate(5deg);
-            color: rgb(180, 20, 20);
-        }
-
-        /* CTA Banner */
-        .cta-banner {
-            margin: 5rem 0 2rem;
+        /* Call to action section */
+        .cta-section {
+            margin: 4rem 0 1rem;
             background: linear-gradient(135deg, rgb(221, 33, 33), rgb(255, 99, 99));
             padding: 3rem;
             border-radius: 16px;
@@ -292,18 +275,19 @@
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .cta-banner:hover {
+        .cta-section:hover {
             transform: translateY(-5px);
             box-shadow: 0 20px 40px rgba(221, 33, 33, 0.4);
         }
 
-        .cta-banner h3 {
+        .cta-section h3 {
+            color: white;
             font-size: 2rem;
             margin: 0 0 1rem;
             font-family: 'Playfair Display', serif;
         }
 
-        .cta-banner p {
+        .cta-section p {
             font-size: 1.2rem;
             margin: 0 0 1.5rem;
             max-width: 700px;
@@ -321,6 +305,7 @@
             font-size: 1.1rem;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+            text-decoration: none;
         }
 
         .cta-button:hover {
@@ -328,16 +313,31 @@
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
         }
 
-        /* Remove Underline on Hover */
-        a {
+        /* Back button */
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.8rem 1.5rem;
+            background: rgb(221, 33, 33);
+            color: white;
+            border-radius: 50px;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
             text-decoration: none;
         }
 
-        a:hover {
-            text-decoration: none;
+        .back-button:hover {
+            transform: translateX(-5px);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
         }
 
-        /* Enhanced Footer */
+        .back-icon {
+            margin-right: 0.5rem;
+        }
+
+        /* Footer */
         footer {
             text-align: center;
             padding: 3rem 1.5rem 2rem;
@@ -347,7 +347,6 @@
             color: #fff;
             margin-top: 5rem;
             font-family: 'Roboto', sans-serif;
-            font-weight: 400;
         }
 
         footer::before {
@@ -389,28 +388,6 @@
             color: rgba(255, 255, 255, 0.7);
         }
 
-        .footer-social {
-            margin-bottom: 2rem;
-        }
-
-        .social-icon {
-            display: inline-block;
-            margin: 0 0.8rem;
-            font-size: 1.5rem;
-            color: white;
-            transition: transform 0.3s ease;
-        }
-
-        .social-icon:hover {
-            transform: translateY(-5px);
-        }
-
-        footer p {
-            margin: 0;
-            font-size: 0.9rem;
-            opacity: 0.9;
-        }
-
         /* Responsive Design */
         @media (max-width: 1024px) {
             header h1 {
@@ -446,21 +423,28 @@
             main {
                 padding: 2rem 1.5rem;
             }
+            
+            .content-card {
+                padding: 1.5rem;
+            }
 
-            .category-list {
-                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-                gap: 2rem;
+            .symptom-text {
+                font-size: 1.1rem;
+            }
+
+            .video-container {
+                grid-template-columns: 1fr;
             }
             
-            .cta-banner {
+            .cta-section {
                 padding: 2.5rem 1.5rem;
             }
             
-            .cta-banner h3 {
+            .cta-section h3 {
                 font-size: 1.8rem;
             }
             
-            .cta-banner p {
+            .cta-section p {
                 font-size: 1.1rem;
             }
         }
@@ -478,11 +462,11 @@
                 font-size: 1.8rem;
             }
             
-            .category-content h3 {
+            h3 {
                 font-size: 1.5rem;
             }
             
-            .category-content p {
+            .symptom-text {
                 font-size: 1rem;
             }
             
@@ -494,8 +478,8 @@
 </head>
 <body>
     <header>
-        <h1>Cardiac Health Blog</h1>
-        <p>Your comprehensive guide to a healthier heart and a happier, more vibrant life.</p>
+        <h1>Symptoms of Cardiac Arrest</h1>
+        <p>Recognizing the warning signs can save a life. Learn what to watch for and how to respond.</p>
         <!-- Wave decoration -->
         <svg class="header-decoration" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 100" preserveAspectRatio="none">
             <path d="M0,0 C150,40 350,50 500,20 C650,0 750,40 900,80 C1050,120 1350,40 1440,30 L1440,100 L0,100 Z"></path>
@@ -514,64 +498,90 @@
             <path d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z" fill="#dd2121"/>
         </svg>
 
-        <h2>Explore Our Blog Categories</h2>
-        <div class="category-list">
-            <!-- Prevention Tips -->
-            <a href="cardiac_rehab" class="category-card">
-                <div class="category-content">
-                    <div class="category-icon">❤</div>
-                    <h3>Cardiac rehab</h3>
-                    <p>Discover simple yet powerful ways to strengthen your heart. From diet tips to exercise routines, we've got you covered!</p>
-                </div>
-            </a>
+        <a href="blogs" class="back-button">
+            <span class="back-icon">←</span> Back to Blog
+        </a>
 
-            <!-- Symptoms & Diagnosis -->
-            <a href="symptoms" class="category-card">
-                <div class="category-content">
-                    <div class="category-icon">🩺</div>
-                    <h3>Symptoms & Diagnosis</h3>
-                    <p>Learn how to recognize the early signs of heart problems and understand the diagnostic process. Knowledge is your first line of defense!</p>
-                </div>
-            </a>
+        <div class="content-card">
+            <img src="{% static 'heart1.png' %}" alt="Cardiac Arrest Symptoms" class="hero-image">
+            
+            <h2>Recognizing Cardiac Arrest</h2>
+            <p>Cardiac arrest is a sudden, unexpected loss of heart function, breathing, and consciousness. Unlike a heart attack, which occurs when blood flow to a part of the heart is blocked, cardiac arrest is caused by an electrical malfunction in the heart that disrupts its pumping action. This disruption stops blood flow to the brain, lungs, and other organs.</p>
+            <p>Immediate recognition and action are crucial for survival. Every minute without treatment decreases the chance of survival by 7-10%.</p>
 
-            <!-- Healthy Lifestyle -->
-            <a href="health" class="category-card">
-                <div class="category-content">
-                    <div class="category-icon">🏃‍♂</div>
-                    <h3>Healthy Lifestyle</h3>
-                    <p>Explore how small changes in your daily habits can lead to big improvements in your heart health. From sleep to stress management, we'll show you how!</p>
-                </div>
-            </a>
+            <h3>Common Symptoms to Watch For</h3>
+            <ul class="symptoms-list" id="symptoms-list">
+                <li class="symptom-item">
+                    <span class="symptom-icon">⚠️</span>
+                    <span class="symptom-text">Sudden collapse</span>
+                </li>
+                <li class="symptom-item">
+                    <span class="symptom-icon">💓</span>
+                    <span class="symptom-text">No pulse</span>
+                </li>
+                <li class="symptom-item">
+                    <span class="symptom-icon">🫁</span>
+                    <span class="symptom-text">No breathing</span>
+                </li>
+                <li class="symptom-item">
+                    <span class="symptom-icon">😴</span>
+                    <span class="symptom-text">Loss of consciousness</span>
+                </li>
+                <li class="symptom-item">
+                    <span class="symptom-icon">❤️</span>
+                    <span class="symptom-text">Chest discomfort</span>
+                </li>
+                <li class="symptom-item">
+                    <span class="symptom-icon">🌬️</span>
+                    <span class="symptom-text">Shortness of breath</span>
+                </li>
+                <li class="symptom-item">
+                    <span class="symptom-icon">😵</span>
+                    <span class="symptom-text">Weakness or dizziness</span>
+                </li>
+            </ul>
 
-            <!-- Research & Innovations -->
-            <a href="research_innovations" class="category-card">
-                <div class="category-content">
-                    <div class="category-icon">🔬</div>
-                    <h3>Research & Innovations</h3>
-                    <p>Stay updated on the latest breakthroughs in cardiac care. From AI-driven diagnostics to cutting-edge treatments, the future of heart health is here!</p>
-                </div>
-            </a>
-
-            <!-- Personal Stories -->
-            <a href="personal_stories" class="category-card">
-                <div class="category-content">
-                    <div class="category-icon">📖</div>
-                    <h3>Personal Stories</h3>
-                    <p>Be inspired by real-life stories of heart disease survivors. Their journeys of resilience and recovery will motivate you to take charge of your health!</p>
-                </div>
-            </a>
-
-            <!-- Myths -->
-            <a href="myths" class="category-card">
-                <div class="category-content">
-                    <div class="category-icon">❓</div>
-                    <h3>Myths</h3>
-                    <p>Debunk common misconceptions about heart health. Learn the facts and separate truth from fiction!</p>
-                </div>
-            </a>
+            <h3>Warning Signs Before Cardiac Arrest</h3>
+            <p>In the days or weeks before cardiac arrest, some people experience warning signs that shouldn't be ignored:</p>
+            <ul class="symptoms-list">
+                <li class="symptom-item">
+                    <span class="symptom-icon">💔</span>
+                    <span class="symptom-text">Chest pain or discomfort</span>
+                </li>
+                <li class="symptom-item">
+                    <span class="symptom-icon">🧠</span>
+                    <span class="symptom-text">Unexplained dizziness or lightheadedness</span>
+                </li>
+                <li class="symptom-item">
+                    <span class="symptom-icon">😓</span>
+                    <span class="symptom-text">Unusual fatigue</span>
+                </li>
+                <li class="symptom-item">
+                    <span class="symptom-icon">❗</span>
+                    <span class="symptom-text">Palpitations or racing heart</span>
+                </li>
+            </ul>
         </div>
 
-        
+        <div class="content-card">
+            <h2>Learn More About Cardiac Arrest</h2>
+            <p>Understanding cardiac arrest can help you respond promptly in an emergency situation. Watch these informative videos to learn more about symptoms, prevention, and how to respond.</p>
+            
+            <div class="video-container">
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/7lMiXJH_bw4" allowfullscreen></iframe>
+                </div>
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/psx-QcxL1A8" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+
+        <div class="cta-section">
+            <h3>Know CPR? You Could Save a Life</h3>
+            <p>When someone experiences cardiac arrest, immediate CPR can double or triple their chances of survival. Consider taking a CPR course to be prepared.</p>
+            <a href="https://www.youtube.com/watch?v=BUhUiPeEX-8" class="cta-button">Find CPR Training</a>
+        </div>
     </main>
 
     
@@ -594,28 +604,46 @@
             ease: "power3.out",
         });
 
-        gsap.from("h2", {
+        gsap.from(".back-button", {
             opacity: 0,
-            y: -20,
+            x: -20,
             duration: 1,
             delay: 1,
             ease: "power3.out",
         });
 
-        gsap.from(".category-card", {
+        gsap.from(".content-card", {
             opacity: 0,
             y: 30,
             duration: 1,
-            stagger: 0.15,
+            stagger: 0.3,
             delay: 1.2,
             ease: "power3.out",
         });
 
-        gsap.from(".cta-banner", {
+        gsap.from(".symptom-item", {
+            opacity: 0,
+            x: -20,
+            duration: 0.6,
+            stagger: 0.1,
+            delay: 1.5,
+            ease: "power3.out",
+        });
+
+        gsap.from(".video-wrapper", {
+            opacity: 0,
+            y: 20,
+            duration: 0.8,
+            stagger: 0.2,
+            delay: 1.8,
+            ease: "power3.out",
+        });
+
+        gsap.from(".cta-section", {
             opacity: 0,
             y: 30,
             duration: 1,
-            delay: 1.8,
+            delay: 2,
             ease: "power3.out",
         });
 
@@ -624,7 +652,7 @@
             scale: 0,
             duration: 1,
             stagger: 0.3,
-            delay: 2,
+            delay: 2.2,
             ease: "elastic.out(1, 0.3)",
         });
         

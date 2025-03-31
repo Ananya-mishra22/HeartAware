@@ -7,7 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog - Cardiac Health</title>
+    <title>Prevention Tips - Cardiac Health</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Playfair+Display:wght@400;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
     <style>
@@ -54,7 +54,7 @@
 
         header h1 {
             margin: 0;
-            font-size: 4rem;
+            font-size: 3.5rem;
             font-weight: 700;
             font-family: 'Playfair Display', serif;
             color: #fff;
@@ -151,193 +151,124 @@
             border-radius: 2px;
         }
 
-        /* Category List */
-        .category-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2.5rem;
-        }
-
-        .category-card {
+        /* Tip card styles */
+        .tip-card {
             background: #fff;
             border-radius: 16px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-            text-decoration: none;
-            color: #333;
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+            margin-bottom: 2.5rem;
             overflow: hidden;
             position: relative;
             border: 1px solid rgba(0, 0, 0, 0.05);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
         }
 
-        .category-card:hover {
-            transform: scale(1.08) translateY(-10px); /* Added upward movement to zoom */
+        .tip-card:hover {
+            transform: translateY(-10px);
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
         }
 
-        .category-card::before {
+        .tip-card::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
-            width: 100%;
+            width: 5px;
             height: 100%;
-            background: linear-gradient(135deg, rgba(221, 33, 33, 0.1), rgba(255, 99, 99, 0.2));
-            opacity: 0;
-            transition: opacity 0.4s ease;
+            background: linear-gradient(to bottom, rgb(221, 33, 33), rgb(255, 99, 99));
         }
 
-        .category-card:hover::before {
-            opacity: 1;
-        }
-
-        .category-content {
+        .tip-content {
             padding: 2.5rem 2rem;
-            text-align: center;
             position: relative;
             z-index: 1;
         }
 
-        .category-content h3 {
+        .tip-icon {
+            font-size: 2.5rem;
+            color: rgb(221, 33, 33);
+            margin-bottom: 1.2rem;
+            display: inline-block;
+            position: relative;
+        }
+
+        .tip-card h3 {
             margin: 0 0 1.2rem;
             color: rgb(221, 33, 33);
             font-size: 1.7rem;
             font-weight: 700;
             font-family: 'Poppins', sans-serif;
-            transition: transform 0.3s ease, color 0.3s ease;
-            position: relative;
-            display: inline-block;
         }
 
-        .category-content h3::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 50%;
-            width: 0;
-            height: 2px;
-            background: rgb(221, 33, 33);
-            transition: width 0.3s ease, left 0.3s ease;
-        }
-
-        .category-card:hover .category-content h3::after {
-            width: 100%;
-            left: 0;
-        }
-
-        .category-card:hover .category-content h3 {
-            transform: translateY(-5px);
-            color: rgb(180, 20, 20);
-        }
-
-        .category-content p {
-            margin: 0;
+        .tip-card p {
+            margin: 0 0 1.2rem;
             font-size: 1.1rem;
             color: #555;
-            opacity: 0.9;
             font-family: 'Roboto', sans-serif;
             font-weight: 400;
             line-height: 1.8;
-            transition: transform 0.3s ease, opacity 0.3s ease;
         }
 
-        .category-card:hover .category-content p {
-            opacity: 1;
-            transform: translateY(-3px);
+        .tip-card ul {
+            margin: 0;
+            padding-left: 1.5rem;
         }
 
-        .category-icon {
-            font-size: 3rem;
+        .tip-card li {
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+            color: #555;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        /* Emergency notice */
+        .emergency-notice {
+            background: linear-gradient(135deg, rgba(221, 33, 33, 0.1), rgba(255, 99, 99, 0.2));
+            border-left: 5px solid rgb(221, 33, 33);
+            padding: 1.5rem 2rem;
+            border-radius: 8px;
+            margin-bottom: 2.5rem;
+        }
+
+        .emergency-notice strong {
+            display: block;
             color: rgb(221, 33, 33);
-            margin-bottom: 1.2rem;
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), color 0.3s ease;
-            display: inline-block;
-            position: relative;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
         }
 
-        .category-icon::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 60px;
-            height: 60px;
-            background: rgba(221, 33, 33, 0.1);
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-            z-index: -1;
-            transition: background-color 0.3s ease, transform 0.3s ease;
-        }
-
-        .category-card:hover .category-icon::after {
-            transform: translate(-50%, -50%) scale(1.2);
-            background: rgba(221, 33, 33, 0.2);
-        }
-
-        .category-card:hover .category-icon {
-            transform: scale(1.2) rotate(5deg);
-            color: rgb(180, 20, 20);
-        }
-
-        /* CTA Banner */
-        .cta-banner {
-            margin: 5rem 0 2rem;
+        /* Warning signs section */
+        .warning-signs {
             background: linear-gradient(135deg, rgb(221, 33, 33), rgb(255, 99, 99));
             padding: 3rem;
             border-radius: 16px;
             text-align: center;
             color: white;
             box-shadow: 0 15px 30px rgba(221, 33, 33, 0.3);
-            transform: translateY(0);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin: 4rem 0;
         }
 
-        .cta-banner:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(221, 33, 33, 0.4);
+        .warning-signs h2 {
+            color: white;
+            margin-top: 0;
         }
 
-        .cta-banner h3 {
-            font-size: 2rem;
-            margin: 0 0 1rem;
-            font-family: 'Playfair Display', serif;
+        .warning-signs h2::after {
+            background: rgba(255, 255, 255, 0.7);
         }
 
-        .cta-banner p {
-            font-size: 1.2rem;
-            margin: 0 0 1.5rem;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .cta-button {
-            display: inline-block;
-            background: white;
-            color: rgb(221, 33, 33);
-            padding: 0.8rem 2rem;
-            border-radius: 50px;
-            font-weight: 600;
+        .warning-signs ul {
+            text-align: left;
+            max-width: 600px;
+            margin: 2rem auto;
             font-size: 1.1rem;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
         }
 
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        .warning-signs li {
+            margin-bottom: 1rem;
         }
 
-        /* Remove Underline on Hover */
-        a {
-            text-decoration: none;
-        }
-
-        a:hover {
-            text-decoration: none;
-        }
-
-        /* Enhanced Footer */
+        /* Footer */
         footer {
             text-align: center;
             padding: 3rem 1.5rem 2rem;
@@ -360,65 +291,41 @@
             background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.5) 50%, rgba(255,255,255,0) 100%);
         }
 
-        .footer-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .footer-logo {
-            font-size: 2rem;
-            font-family: 'Playfair Display', serif;
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-        }
-
-        .footer-nav {
-            margin-bottom: 2rem;
-        }
-
-        .footer-nav a {
-            color: white;
-            margin: 0 1rem;
-            transition: color 0.3s ease;
-        }
-
-        .footer-nav a:hover {
-            color: rgba(255, 255, 255, 0.7);
-        }
-
-        .footer-social {
-            margin-bottom: 2rem;
-        }
-
-        .social-icon {
-            display: inline-block;
-            margin: 0 0.8rem;
-            font-size: 1.5rem;
-            color: white;
-            transition: transform 0.3s ease;
-        }
-
-        .social-icon:hover {
-            transform: translateY(-5px);
-        }
-
         footer p {
             margin: 0;
             font-size: 0.9rem;
             opacity: 0.9;
         }
 
+        /* Back to Home button */
+        .back-button {
+            display: inline-block;
+            background:rgb(221, 33, 33);
+            color:white;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-top: 2rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+            text-decoration: none;
+        }
+
+        .back-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            text-decoration: none;
+        }
+
         /* Responsive Design */
         @media (max-width: 1024px) {
             header h1 {
-                font-size: 3.5rem;
+                font-size: 3rem;
             }
             
             header p {
-                font-size: 1.3rem;
+                font-size: 1.2rem;
             }
             
             h2 {
@@ -432,7 +339,7 @@
             }
             
             header h1 {
-                font-size: 3rem;
+                font-size: 2.5rem;
             }
 
             header p {
@@ -446,28 +353,19 @@
             main {
                 padding: 2rem 1.5rem;
             }
-
-            .category-list {
-                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-                gap: 2rem;
+            
+            .tip-content {
+                padding: 2rem 1.5rem;
             }
             
-            .cta-banner {
+            .warning-signs {
                 padding: 2.5rem 1.5rem;
-            }
-            
-            .cta-banner h3 {
-                font-size: 1.8rem;
-            }
-            
-            .cta-banner p {
-                font-size: 1.1rem;
             }
         }
 
         @media (max-width: 480px) {
             header h1 {
-                font-size: 2.5rem;
+                font-size: 2.2rem;
             }
             
             header p {
@@ -478,24 +376,20 @@
                 font-size: 1.8rem;
             }
             
-            .category-content h3 {
+            .tip-card h3 {
                 font-size: 1.5rem;
             }
             
-            .category-content p {
+            .tip-card p, .tip-card li {
                 font-size: 1rem;
-            }
-            
-            .footer-nav a {
-                margin: 0 0.5rem;
             }
         }
     </style>
 </head>
 <body>
     <header>
-        <h1>Cardiac Health Blog</h1>
-        <p>Your comprehensive guide to a healthier heart and a happier, more vibrant life.</p>
+        <h1>Heart Attack Prevention Tips</h1>
+        <p>Simple yet powerful ways to protect your heart and live a longer, healthier life.</p>
         <!-- Wave decoration -->
         <svg class="header-decoration" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 100" preserveAspectRatio="none">
             <path d="M0,0 C150,40 350,50 500,20 C650,0 750,40 900,80 C1050,120 1350,40 1440,30 L1440,100 L0,100 Z"></path>
@@ -514,68 +408,136 @@
             <path d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z" fill="#dd2121"/>
         </svg>
 
-        <h2>Explore Our Blog Categories</h2>
-        <div class="category-list">
-            <!-- Prevention Tips -->
-            <a href="cardiac_rehab" class="category-card">
-                <div class="category-content">
-                    <div class="category-icon">❤</div>
-                    <h3>Cardiac rehab</h3>
-                    <p>Discover simple yet powerful ways to strengthen your heart. From diet tips to exercise routines, we've got you covered!</p>
-                </div>
-            </a>
-
-            <!-- Symptoms & Diagnosis -->
-            <a href="symptoms" class="category-card">
-                <div class="category-content">
-                    <div class="category-icon">🩺</div>
-                    <h3>Symptoms & Diagnosis</h3>
-                    <p>Learn how to recognize the early signs of heart problems and understand the diagnostic process. Knowledge is your first line of defense!</p>
-                </div>
-            </a>
-
-            <!-- Healthy Lifestyle -->
-            <a href="health" class="category-card">
-                <div class="category-content">
-                    <div class="category-icon">🏃‍♂</div>
-                    <h3>Healthy Lifestyle</h3>
-                    <p>Explore how small changes in your daily habits can lead to big improvements in your heart health. From sleep to stress management, we'll show you how!</p>
-                </div>
-            </a>
-
-            <!-- Research & Innovations -->
-            <a href="research_innovations" class="category-card">
-                <div class="category-content">
-                    <div class="category-icon">🔬</div>
-                    <h3>Research & Innovations</h3>
-                    <p>Stay updated on the latest breakthroughs in cardiac care. From AI-driven diagnostics to cutting-edge treatments, the future of heart health is here!</p>
-                </div>
-            </a>
-
-            <!-- Personal Stories -->
-            <a href="personal_stories" class="category-card">
-                <div class="category-content">
-                    <div class="category-icon">📖</div>
-                    <h3>Personal Stories</h3>
-                    <p>Be inspired by real-life stories of heart disease survivors. Their journeys of resilience and recovery will motivate you to take charge of your health!</p>
-                </div>
-            </a>
-
-            <!-- Myths -->
-            <a href="myths" class="category-card">
-                <div class="category-content">
-                    <div class="category-icon">❓</div>
-                    <h3>Myths</h3>
-                    <p>Debunk common misconceptions about heart health. Learn the facts and separate truth from fiction!</p>
-                </div>
-            </a>
+        <div class="emergency-notice">
+            <strong>Important:</strong> If you're experiencing chest pain or symptoms of a heart attack, call emergency services immediately. This information is educational and not a substitute for professional medical advice.
         </div>
 
+        <a href="blogs" class="back-button">
+            <span class="back-icon">←</span> Back to Blog
+        </a>
+
+        <h2>Understanding Heart Health</h2>
+        <div class="tip-card">
+            <div class="tip-content">
+                <div class="tip-icon">🫀</div>
+                <h3>What Causes Heart Attacks?</h3>
+                <p>Heart attacks occur when blood flow to a part of the heart is blocked, usually by a blood clot. Without blood flow, heart tissue begins to die. Making lifestyle changes can significantly reduce your risk of having a heart attack or experiencing a second one.</p>
+            </div>
+        </div>
+
+        <h2>Lifestyle Changes That Make A Difference</h2>
         
+        <div class="tip-card">
+            <div class="tip-content">
+                <div class="tip-icon">🚭</div>
+                <h3>Quit Smoking</h3>
+                <p>Smoking damages blood vessels, reduces oxygen in the blood, and makes the heart work harder. Quitting smoking can rapidly reduce your heart attack risk.</p>
+                <ul>
+                    <li>Seek support from healthcare providers</li>
+                    <li>Consider nicotine replacement therapies</li>
+                    <li>Join smoking cessation programs</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="tip-card">
+            <div class="tip-content">
+                <div class="tip-icon">🥗</div>
+                <h3>Heart-Healthy Eating</h3>
+                <p>Your diet plays a crucial role in heart health. Focus on:</p>
+                <ul>
+                    <li>Fruits, vegetables, and whole grains</li>
+                    <li>Lean proteins like fish, poultry, and legumes</li>
+                    <li>Healthy fats from sources like olive oil, nuts, and avocados</li>
+                    <li>Limiting sodium, added sugars, and processed foods</li>
+                    <li>Moderating alcohol consumption</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="tip-card">
+            <div class="tip-content">
+                <div class="tip-icon">🏃‍♂</div>
+                <h3>Regular Physical Activity</h3>
+                <p>Exercise strengthens your heart and improves circulation. Aim for:</p>
+                <ul>
+                    <li>At least 150 minutes of moderate-intensity activity per week</li>
+                    <li>Muscle-strengthening activities twice a week</li>
+                    <li>Daily movement and less sitting time</li>
+                </ul>
+                <p>Always consult with your healthcare provider before starting a new exercise program, especially after a heart attack.</p>
+            </div>
+        </div>
+        
+        <div class="tip-card">
+            <div class="tip-content">
+                <div class="tip-icon">⚖️</div>
+                <h3>Maintain a Healthy Weight</h3>
+                <p>Excess weight, especially around the waist, increases heart attack risk by raising blood pressure, cholesterol, and diabetes risk.</p>
+                <ul>
+                    <li>Work with healthcare providers to determine a healthy weight goal</li>
+                    <li>Make sustainable dietary changes</li>
+                    <li>Incorporate regular physical activity</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="tip-card">
+            <div class="tip-content">
+                <div class="tip-icon">😌</div>
+                <h3>Manage Stress</h3>
+                <p>Chronic stress can increase heart attack risk. Healthy ways to manage stress include:</p>
+                <ul>
+                    <li>Mindfulness and meditation practices</li>
+                    <li>Regular physical activity</li>
+                    <li>Adequate sleep</li>
+                    <li>Social connections and support</li>
+                    <li>Professional counseling when needed</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="tip-card">
+            <div class="tip-content">
+                <div class="tip-icon">💊</div>
+                <h3>Control Medical Conditions</h3>
+                <p>Managing these conditions is crucial for heart health:</p>
+                <ul>
+                    <li>High blood pressure</li>
+                    <li>High cholesterol</li>
+                    <li>Diabetes</li>
+                    <li>Sleep apnea</li>
+                </ul>
+                <p>Take medications as prescribed and attend regular check-ups with your healthcare provider.</p>
+            </div>
+        </div>
+
+        <div class="tip-card">
+            <div class="tip-content">
+                <div class="tip-icon">📝</div>
+                <h3>Creating Your Heart Health Plan</h3>
+                <p>Work with your healthcare team to develop a personalized plan that addresses your specific risk factors. Regular follow-ups are essential to monitor your progress and adjust your plan as needed.</p>
+                <p>If you've had a heart attack, cardiac rehabilitation programs can provide supervised exercise, education, and support to help you recover and reduce your risk of future heart problems.</p>
+            </div>
+        </div>
+
+        <div class="warning-signs">
+            <h2>Know the Warning Signs</h2>
+            <p>Being able to recognize heart attack symptoms can save lives. Common warning signs include:</p>
+            <ul>
+                <li>Chest discomfort or pain that feels like pressure, squeezing, fullness, or pain</li>
+                <li>Pain or discomfort in one or both arms, the back, neck, jaw, or stomach</li>
+                <li>Shortness of breath with or without chest discomfort</li>
+                <li>Cold sweat, nausea, or lightheadedness</li>
+                <li>Women may experience less typical symptoms such as unusual fatigue, sleep disturbances, or shortness of breath without chest pain</li>
+            </ul>
+            <p>If you experience these symptoms, call emergency services immediately. Minutes matter!</p>
+        </div>
+
+       
     </main>
 
-    
-
+  
     <script>
         // GSAP Animations
         gsap.from("header h1", {
@@ -594,15 +556,24 @@
             ease: "power3.out",
         });
 
-        gsap.from("h2", {
+        gsap.from(".emergency-notice", {
             opacity: 0,
-            y: -20,
+            y: 30,
             duration: 1,
             delay: 1,
             ease: "power3.out",
         });
 
-        gsap.from(".category-card", {
+        gsap.from("h2", {
+            opacity: 0,
+            y: -20,
+            duration: 1,
+            delay: 1,
+            stagger: 0.3,
+            ease: "power3.out",
+        });
+
+        gsap.from(".tip-card", {
             opacity: 0,
             y: 30,
             duration: 1,
@@ -611,7 +582,7 @@
             ease: "power3.out",
         });
 
-        gsap.from(".cta-banner", {
+        gsap.from(".warning-signs", {
             opacity: 0,
             y: 30,
             duration: 1,
