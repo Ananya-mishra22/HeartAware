@@ -32,11 +32,16 @@ urlpatterns = [
     path('logout',logout_view,name='logout'),
     path('history',history,name='history'),
     path('recommendations',recommendations,name='recommendations'),
+<<<<<<< HEAD
     path('symptoms', symptoms, name='symptoms'),
     path('health',health,name='health'),
     path('myths',myths,name='myths'),
     path('personal_stories',personal_stories,name='personal_stories'),
     path('research_innovations',research_innovations,name='research_innovations'),
     path('cardiac_rehab',cardiac_rehab,name='cardiac_rehab'),
+=======
+    path('2decho', predict_view, name='predict'),
+    path('wpr_form', calculate_wpr, name='calculate_wpr'),
+>>>>>>> a35e526f9b66f64e920faf899d1018262edf5858
 
 ]
