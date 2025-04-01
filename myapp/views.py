@@ -128,3 +128,66 @@ def cardiac_rehab(request):
     print(request.user.is_authenticated)
     base_template = "base1.html" if request.user.is_authenticated else "base.html"
     return render(request, 'cardiac_rehab.html', {"base_template": base_template})
+#2d echo
+
+from django.shortcuts import render
+
+def predict_cardiac_arrest(ejection_fraction, lv_edd, pap, mitral_regurgitation, pericardial_effusion):
+    """Threshold-based logic for cardiac arrest prediction"""
+    if (ejection_fraction < 40 or lv_edd > 65 or pap > 30 or 
+        mitral_regurgitation == "Severe" or pericardial_effusion == "Present"):
+        return "High Risk of Cardiac Arrest 🚨"
+    else:
+        return "Low Risk of Cardiac Arrest ✅"
+
+def predict_view(request):
+    if request.method == "POST":
+        # Get form data
+        ejection_fraction = float(request.POST.get("ejection_fraction"))
+        lv_edd = float(request.POST.get("lv_edd"))
+        pap = float(request.POST.get("pap"))
+        mitral_regurgitation = request.POST.get("mitral_regurgitation")
+        pericardial_effusion = request.POST.get("pericardial_effusion")
+
+        # Make prediction
+        result = predict_cardiac_arrest(ejection_fraction, lv_edd, pap, mitral_regurgitation, pericardial_effusion)
+
+        # Render with result
+        return render(request, "2decho.html", {"result": result})
+
+    return render(request, "2decho.html")
+
+
+
+#wpr blood test
+
+
+def calculate_wpr(request):
+    result = None
+
+    if request.method == "POST":
+        try:
+            wbc_count = int(request.POST.get('wbc_count'))
+            platelet_count = int(request.POST.get('platelet_count'))
+
+            if platelet_count > 0:  # Avoid division by zero
+                wpr = wbc_count / platelet_count  
+
+                # Determine Risk Level
+                if wpr < 0.025:
+                    risk_level = "✅ Low Risk - Normal heart function"
+                elif 0.025 <= wpr < 0.05:  # Now WPR=0.05 will be High Risk
+                    risk_level = "⚠️ Moderate Risk - Possible early heart disease"
+                else:  # WPR ≥ 0.05
+                    risk_level = "🚨 High Risk - Increased heart attack risk"
+
+
+                result = f"WPR Value: {wpr:.5f} | Risk Level: {risk_level}"
+            else:
+                result = "❌ Error: Platelet count must be greater than zero."
+
+        except ValueError:
+            result = "❌ Error: Please enter valid numerical values."
+
+    return render(request, "wpr_form.html", {"result": result})
+

@@ -38,5 +38,7 @@ urlpatterns = [
     path('personal_stories',personal_stories,name='personal_stories'),
     path('research_innovations',research_innovations,name='research_innovations'),
     path('cardiac_rehab',cardiac_rehab,name='cardiac_rehab'),
+    path('2decho', predict_view, name='predict'),
+    path('wpr_form', calculate_wpr, name='calculate_wpr'),
 
 ]
