@@ -101,6 +101,35 @@ def recommendations(request):
     base_template = "base1.html" if request.user.is_authenticated else "base.html"
     return render(request, "recommendations.html", {"base_template": base_template})
 
+def symptoms(request):
+    print(request.user.is_authenticated)
+    base_template = "base1.html" if request.user.is_authenticated else "base.html"
+    return render(request, 'symptoms.html', {"base_template": base_template})
+
+def health(request):
+    print(request.user.is_authenticated)
+    base_template = "base1.html" if request.user.is_authenticated else "base.html"
+    return render(request, 'health.html', {"base_template": base_template})
+
+def myths(request):
+    print(request.user.is_authenticated)
+    base_template = "base1.html" if request.user.is_authenticated else "base.html"
+    return render(request, 'myths.html', {"base_template": base_template})
+
+def personal_stories(request):
+    print(request.user.is_authenticated)
+    base_template = "base1.html" if request.user.is_authenticated else "base.html"
+    return render(request, 'personal_stories.html', {"base_template": base_template})
+
+def research_innovations(request):
+    print(request.user.is_authenticated)
+    base_template = "base1.html" if request.user.is_authenticated else "base.html"
+    return render(request, 'research_innovations.html', {"base_template": base_template})
+
+def cardiac_rehab(request):
+    print(request.user.is_authenticated)
+    base_template = "base1.html" if request.user.is_authenticated else "base.html"
+    return render(request, 'cardiac_rehab.html', {"base_template": base_template})
 #2d echo
 
 from django.shortcuts import render

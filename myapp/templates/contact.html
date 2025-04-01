@@ -1,99 +1,816 @@
 {% extends base_template %}
 {% load static %}
 {% block body %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Us - Heart Attack Prediction</title>
+    <title>Contact Us - Cardiac Health</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Playfair+Display:wght@400;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
     <style>
+        /* General Styles */
         body {
+            font-family: 'Poppins', Arial, sans-serif;
+            line-height: 1.6;
             margin: 0;
-            font-family: Arial, sans-serif;
+            padding: 0;
+            background-color: #f8f4f4; /* Slightly warm background */
+            color: #333;
+            overflow-x: hidden; /* Prevent horizontal scroll */
         }
-        .navbar {
+
+        /* Enhanced Header */
+        header {
+            padding: 6rem 0 5rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, rgba(221, 33, 33, 0.9), rgba(255, 99, 99, 0.8)), 
+                        url('https://cdnjs.cloudflare.com/ajax/libs/simple-icons/3.0.1/heart.svg') no-repeat center/cover;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Animated heart beat pulse effect */
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 70%);
+            animation: heartbeat 2s infinite ease-in-out;
+            pointer-events: none;
+        }
+
+        @keyframes heartbeat {
+            0% { transform: scale(0.8); opacity: 0; }
+            50% { transform: scale(1.2); opacity: 0.3; }
+            100% { transform: scale(0.8); opacity: 0; }
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 4rem;
+            font-weight: 700;
+            font-family: 'Playfair Display', serif;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            position: relative;
+            letter-spacing: -0.5px;
+        }
+
+        header p {
+            margin: 1rem 0 0;
+            font-size: 1.4rem;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 400;
+            color: #fff;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Header decoration */
+        .header-decoration {
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            fill: #f8f4f4;
+            transform: translateY(1px);
+        }
+
+        /* Main Content */
+        main {
+            padding: 3rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        /* Floating heart decorations */
+        .floating-heart {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            opacity: 0.15;
+            z-index: -1;
+            animation: float 8s infinite ease-in-out;
+        }
+
+        .heart-1 {
+            top: 10%;
+            left: 5%;
+            animation-delay: 0s;
+            transform: rotate(-15deg);
+        }
+
+        .heart-2 {
+            top: 35%;
+            right: 7%;
+            animation-delay: 2s;
+            transform: rotate(20deg);
+        }
+
+        .heart-3 {
+            bottom: 15%;
+            left: 8%;
+            animation-delay: 4s;
+            transform: rotate(5deg);
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0) rotate(-15deg); }
+            50% { transform: translateY(-20px) rotate(0deg); }
+            100% { transform: translateY(0) rotate(-15deg); }
+        }
+
+        h2 {
+            color: rgb(221, 33, 33);
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            position: relative;
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+        }
+
+        h2::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(to right, rgb(221, 33, 33), rgb(255, 99, 99));
+            margin: 0.8rem auto 0;
+            border-radius: 2px;
+        }
+
+        /* Contact Section Styles */
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 4rem;
+        }
+
+        @media (max-width: 768px) {
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Contact Form */
+        .contact-form {
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            padding: 2.5rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .contact-form:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            color: #444;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            font-size: 1rem;
+            border: 2px solid #eee;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: rgba(221, 33, 33, 0.5);
+            box-shadow: 0 0 0 3px rgba(221, 33, 33, 0.1);
+        }
+
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .submit-button {
+            background: linear-gradient(135deg, rgb(221, 33, 33), rgb(255, 99, 99));
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 15px rgba(221, 33, 33, 0.3);
+        }
+
+        .submit-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(221, 33, 33, 0.4);
+        }
+
+        /* Contact Info */
+        .contact-info {
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            padding: 2.5rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .contact-info:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+        }
+
+        .contact-info h3 {
+            color: rgb(221, 33, 33);
+            font-size: 1.7rem;
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+            font-family: 'Playfair Display', serif;
+            position: relative;
+        }
+
+        .contact-info h3::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(to right, rgb(221, 33, 33), rgb(255, 99, 99));
+            margin-top: 0.5rem;
+            border-radius: 2px;
+        }
+
+        .contact-method {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-icon {
+            background: rgba(221, 33, 33, 0.1);
+            color: rgb(221, 33, 33);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .contact-details {
+            flex-grow: 1;
+        }
+
+        .contact-details h4 {
+            margin: 0 0 0.3rem 0;
+            font-size: 1.1rem;
+        }
+
+        .contact-details p {
+            margin: 0;
+            color: #555;
+        }
+
+        .social-links {
+            display: flex;
+            margin-top: 2rem;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(221, 33, 33, 0.1);
+            color: rgb(221, 33, 33);
+            border-radius: 50%;
+            margin-right: 1rem;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        .social-link:hover {
+            transform: translateY(-5px);
+            background: rgb(221, 33, 33);
+            color: white;
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            margin-top: 4rem;
+        }
+
+        .faq-container {
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid #eee;
+            overflow: hidden;
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-question {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background-color: rgb(221, 33, 33);
-            padding: 15px 20px;
-        }
-        .navbar .logo {
-            color: white;
-            font-size: 20px;
-            font-weight: bold;
-        }
-        .navbar .menu {
-            display: flex;
-            align-items: center;
-        }
-        .navbar .menu a {
-            color: white;
-            text-decoration: none;
-            padding: 10px 15px;
-            font-size: 16px;
+            padding: 1.5rem 2rem;
             cursor: pointer;
+            font-weight: 500;
+            color: #444;
+            transition: background-color 0.3s ease;
         }
-        .navbar .menu a:hover {
-            background-color: #f4c2c2;
-            border-radius: 5px;
+
+        .faq-question:hover {
+            background-color: rgba(221, 33, 33, 0.05);
         }
-        .auth-buttons a {
-            background-color: white;
+
+        .faq-question::after {
+            content: '+';
+            font-size: 1.5rem;
             color: rgb(221, 33, 33);
-            padding: 10px 15px;
-            border-radius: 5px;
-            text-decoration: none;
-            margin-left: 10px;
-            font-weight: bold;
+            transition: transform 0.3s ease;
         }
-        .contact-container {
-            padding: 40px;
-            color:rgb(41, 3, 3)
+
+        .faq-question.active::after {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            padding: 0 2rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+        }
+
+        .faq-answer.active {
+            padding: 0 2rem 1.5rem;
+            max-height: 500px;
+        }
+
+        /* Map Section */
+        .map-section {
+            margin-top: 4rem;
+            position: relative;
+        }
+
+        .map-container {
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            height: 400px;
+            position: relative;
+            background-color: #eee;
+        }
+
+        .map-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(221, 33, 33, 0.1);
+            pointer-events: none;
+        }
+
+        /* Enhanced Footer */
+        footer {
             text-align: center;
+            padding: 3rem 1.5rem 2rem;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, rgb(221, 33, 33), rgb(255, 99, 99));
+            color: #fff;
+            margin-top: 5rem;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 400;
         }
-        .contact-form {
-            max-width: 500px;
-            margin: auto;
-            background: #f4f4f4;
-            padding: 20px;
-            border-radius: 10px;
-        }
-        .contact-form input, .contact-form textarea {
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ccc;
-            border-radius: 5px;
+            height: 15px;
+            background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.5) 50%, rgba(255,255,255,0) 100%);
         }
-        .contact-form button {
-            background: rgb(221, 33, 33);
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-logo {
+            font-size: 2rem;
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-nav {
+            margin-bottom: 2rem;
+        }
+
+        .footer-nav a {
             color: white;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            width: 100%;
+            margin: 0 1rem;
+            transition: color 0.3s ease;
         }
-        .contact-form button:hover {
-            background: #cc0000;
+
+        .footer-nav a:hover {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .footer-social {
+            margin-bottom: 2rem;
+        }
+
+        .social-icon {
+            display: inline-block;
+            margin: 0 0.8rem;
+            font-size: 1.5rem;
+            color: white;
+            transition: transform 0.3s ease;
+        }
+
+        .social-icon:hover {
+            transform: translateY(-5px);
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            header h1 {
+                font-size: 3.5rem;
+            }
+            
+            header p {
+                font-size: 1.3rem;
+            }
+            
+            h2 {
+                font-size: 2.2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 5rem 1rem 4rem;
+            }
+            
+            header h1 {
+                font-size: 3rem;
+            }
+
+            header p {
+                font-size: 1.1rem;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+
+            main {
+                padding: 2rem 1.5rem;
+            }
+            
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-form, .contact-info {
+                padding: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 2.5rem;
+            }
+            
+            header p {
+                font-size: 1rem;
+            }
+            
+            h2 {
+                font-size: 1.8rem;
+            }
+            
+            .contact-form, .contact-info {
+                padding: 1.5rem;
+            }
+            
+            .footer-nav a {
+                margin: 0 0.5rem;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="contact-container">
-        <h2 style="color: rgb(221, 33, 33); text-align: center;">Contact Us</h2>
-        <p style="color: rgb(221, 33, 33); text-align: center;">If you have any questions, feel free to reach out to us.</p>
-        <div class="contact-form">
-            <form>
-                <input type="text" name="name" placeholder="Your Name" required>
-                <input type="email" name="email" placeholder="Your Email" required>
-                <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
-                <button type="submit">Send Message</button>
-            </form>
+    <header>
+        <h1>Contact Us</h1>
+        <p>We're here to help. Reach out with your questions, concerns, or feedback.</p>
+        <!-- Wave decoration -->
+        <svg class="header-decoration" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 100" preserveAspectRatio="none">
+            <path d="M0,0 C150,40 350,50 500,20 C650,0 750,40 900,80 C1050,120 1350,40 1440,30 L1440,100 L0,100 Z"></path>
+        </svg>
+    </header>
+
+    <main>
+        <!-- Floating decorative hearts -->
+        <svg class="floating-heart heart-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z" fill="#dd2121"/>
+        </svg>
+        <svg class="floating-heart heart-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z" fill="#dd2121"/>
+        </svg>
+        <svg class="floating-heart heart-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z" fill="#dd2121"/>
+        </svg>
+
+        <h2>Get in Touch</h2>
+        
+        <div class="contact-container">
+            <!-- Contact Form -->
+            <div class="contact-form">
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Your Name</label>
+                        <input type="text" id="name" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <select id="subject" class="form-control" required>
+                            <option value="" selected disabled>Select a topic</option>
+                            <option value="general">General Inquiry</option>
+                            <option value="support">Medical Support</option>
+                            <option value="blog">Blog Feedback</option>
+                            <option value="partnership">Partnership Opportunities</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Your Message</label>
+                        <textarea id="message" class="form-control" required></textarea>
+                    </div>
+                    <button type="submit" class="submit-button">Send Message</button>
+                </form>
+            </div>
+            
+            <!-- Contact Information -->
+            <div class="contact-info">
+                <h3>Our Contact Information</h3>
+                
+                <div class="contact-method">
+                    <div class="contact-icon">📞</div>
+                    <div class="contact-details">
+                        <h4>Phone</h4>
+                        <p>+1 (555) 123-4567</p>
+                        <p>Monday to Friday, 9am - 5pm EST</p>
+                    </div>
+                </div>
+                
+                <div class="contact-method">
+                    <div class="contact-icon">✉️</div>
+                    <div class="contact-details">
+                        <h4>Email</h4>
+                        <p>contact@cardiachealth.org</p>
+                        <p>support@cardiachealth.org</p>
+                    </div>
+                </div>
+                
+                <div class="contact-method">
+                    <div class="contact-icon">📍</div>
+                    <div class="contact-details">
+                        <h4>Location</h4>
+                        <p>123 Heartbeat Avenue</p>
+                        <p>New York, NY 10001</p>
+                    </div>
+                </div>
+                
+                <h3>Connect With Us</h3>
+                <div class="social-links">
+                    <a href="#" class="social-link">
+                        <span>f</span>
+                    </a>
+                    <a href="#" class="social-link">
+                        <span>t</span>
+                    </a>
+                    <a href="#" class="social-link">
+                        <span>in</span>
+                    </a>
+                    <a href="#" class="social-link">
+                        <span>ig</span>
+                    </a>
+                </div>
+            </div>
         </div>
-    </div>
+
+        <!-- FAQ Section -->
+        <div class="faq-section">
+            <h2>Frequently Asked Questions</h2>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">How quickly can I expect a response to my inquiry?</div>
+                    <div class="faq-answer">
+                        <p>We strive to respond to all inquiries within 24-48 hours during business days. For urgent medical questions, please contact your healthcare provider directly or call emergency services.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Can I schedule a consultation with a cardiac specialist through this website?</div>
+                    <div class="faq-answer">
+                        <p>While we don't provide direct medical consultations through our website, we can help connect you with cardiac specialists in your area. Please use our contact form and select "Medical Support" as the subject.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">How can I contribute my story to your blog?</div>
+                    <div class="faq-answer">
+                        <p>We welcome personal stories from heart disease survivors and caregivers. Please use our contact form with the subject "Blog Feedback" and mention your interest in sharing your story. Our editorial team will reach out to you with further details.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Do you offer educational materials for healthcare providers?</div>
+                    <div class="faq-answer">
+                        <p>Yes, we provide educational resources for healthcare professionals. Please contact us with details about your organization and specific needs, and our team will assist you with relevant materials.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Map Section -->
+        <div class="map-section">
+            <h2>Find Us</h2>
+            <div class="map-container">
+                <!-- Placeholder for Google Maps -->
+                <div style="width:100%; height:100%; background:#eee; display:flex; align-items:center; justify-content:center;">
+                    <p style="font-size:1.2rem; color:#666;">Interactive Map Loading...</p>
+                </div>
+                <div class="map-overlay"></div>
+            </div>
+        </div>
+    </main>
+
+    
+            <div class="footer-social">
+                <a href="#" class="social-icon">f</a>
+                <a href="#" class="social-icon">t</a>
+                <a href="#" class="social-icon">in</a>
+                <a href="#" class="social-icon">ig</a>
+            </div>
+            <p>&copy; 2025 Cardiac Health Blog. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // GSAP Animations
+        gsap.from("header h1", {
+            opacity: 0,
+            y: -50,
+            duration: 1.2,
+            delay: 0.3,
+            ease: "power3.out",
+        });
+
+        gsap.from("header p", {
+            opacity: 0,
+            y: -30,
+            duration: 1.2,
+            delay: 0.6,
+            ease: "power3.out",
+        });
+
+        gsap.from("h2", {
+            opacity: 0,
+            y: -20,
+            duration: 1,
+            delay: 1,
+            ease: "power3.out",
+        });
+
+        gsap.from(".contact-form", {
+            opacity: 0,
+            x: -30,
+            duration: 1,
+            delay: 1.2,
+            ease: "power3.out",
+        });
+
+        gsap.from(".contact-info", {
+            opacity: 0,
+            x: 30,
+            duration: 1,
+            delay: 1.4,
+            ease: "power3.out",
+        });
+
+        gsap.from(".faq-container", {
+            opacity: 0,
+            y: 30,
+            duration: 1,
+            delay: 1.6,
+            ease: "power3.out",
+        });
+
+        gsap.from(".map-container", {
+            opacity: 0,
+            y: 30,
+            duration: 1,
+            delay: 1.8,
+            ease: "power3.out",
+        });
+
+        gsap.from(".floating-heart", {
+            opacity: 0,
+            scale: 0,
+            duration: 1,
+            stagger: 0.3,
+            delay: 2,
+            ease: "elastic.out(1, 0.3)",
+        });
+        
+        // Animate the wave on scroll
+        window.addEventListener('scroll', function() {
+            let scrollPosition = window.scrollY;
+            if (scrollPosition < 500) {
+                gsap.to(".header-decoration", {
+                    y: 1 + (scrollPosition * 0.05),
+                    duration: 0.3,
+                    ease: "power1.out"
+                });
+            }
+        });
+        
+        // FAQ Accordion
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const answer = question.nextElementSibling;
+                const isActive = question.classList.contains('active');
+                
+                // Close all other FAQs
+                document.querySelectorAll('.faq-question').forEach(q => {
+                    q.classList.remove('active');
+                    q.nextElementSibling.classList.remove('active');
+                });
+                
+                // Toggle current FAQ
+                if (!isActive) {
+                    question.classList.add('active');
+                    answer.classList.add('active');
+                }
+            });
+        });
+        
+        // Form submission
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your message! We will get back to you as soon as possible.');
+            this.reset();
+        });
+    </script>
 </body>
 </html>
 {% endblock body %}

@@ -1,0 +1,608 @@
+{% extends base_template %}
+{% load static %}
+{% block body %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top Myths About Cardiovascular Disease - Cardiac Health</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Playfair+Display:wght@400;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Poppins', Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f4f4; /* Slightly warm background */
+            color: #333;
+            overflow-x: hidden; /* Prevent horizontal scroll */
+        }
+
+        /* Enhanced Header */
+        header {
+            padding: 6rem 0 5rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, rgba(221, 33, 33, 0.9), rgba(255, 99, 99, 0.8)), 
+                        url('https://cdnjs.cloudflare.com/ajax/libs/simple-icons/3.0.1/heart.svg') no-repeat center/cover;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Animated heart beat pulse effect */
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 70%);
+            animation: heartbeat 2s infinite ease-in-out;
+            pointer-events: none;
+        }
+
+        @keyframes heartbeat {
+            0% { transform: scale(0.8); opacity: 0; }
+            50% { transform: scale(1.2); opacity: 0.3; }
+            100% { transform: scale(0.8); opacity: 0; }
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 3.5rem;
+            font-weight: 700;
+            font-family: 'Playfair Display', serif;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            position: relative;
+            letter-spacing: -0.5px;
+        }
+
+        header p {
+            margin: 1rem 0 0;
+            font-size: 1.4rem;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 400;
+            color: #fff;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Header decoration */
+        .header-decoration {
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            fill: #f8f4f4;
+            transform: translateY(1px);
+        }
+
+        /* Main Content */
+        main {
+            padding: 3rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        /* Floating heart decorations */
+        .floating-heart {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            opacity: 0.15;
+            z-index: -1;
+            animation: float 8s infinite ease-in-out;
+        }
+
+        .heart-1 {
+            top: 10%;
+            left: 5%;
+            animation-delay: 0s;
+            transform: rotate(-15deg);
+        }
+
+        .heart-2 {
+            top: 35%;
+            right: 7%;
+            animation-delay: 2s;
+            transform: rotate(20deg);
+        }
+
+        .heart-3 {
+            bottom: 15%;
+            left: 8%;
+            animation-delay: 4s;
+            transform: rotate(5deg);
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0) rotate(-15deg); }
+            50% { transform: translateY(-20px) rotate(0deg); }
+            100% { transform: translateY(0) rotate(-15deg); }
+        }
+
+        h2 {
+            color: rgb(221, 33, 33);
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            position: relative;
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+        }
+
+        h2::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(to right, rgb(221, 33, 33), rgb(255, 99, 99));
+            margin: 0.8rem auto 0;
+            border-radius: 2px;
+        }
+
+        /* Myth card styles */
+        .myth-card {
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            margin-bottom: 2.5rem;
+            overflow: hidden;
+            position: relative;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+        }
+
+        .myth-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .myth-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(to bottom, rgb(221, 33, 33), rgb(255, 99, 99));
+        }
+
+        .myth-content {
+            padding: 2.5rem 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .myth-icon {
+            font-size: 2.5rem;
+            color: rgb(221, 33, 33);
+            margin-bottom: 1.2rem;
+            display: inline-block;
+            position: relative;
+        }
+
+        .myth-card h3 {
+            margin: 0 0 1.2rem;
+            color: rgb(221, 33, 33);
+            font-size: 1.7rem;
+            font-weight: 700;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .myth-card p {
+            margin: 0 0 1.2rem;
+            font-size: 1.1rem;
+            color: #555;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 400;
+            line-height: 1.8;
+        }
+
+        .myth-card .myth-tag {
+            display: inline-block;
+            background-color: rgb(221, 33, 33);
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .myth-card .fact-tag {
+            display: inline-block;
+            background-color: #2e7d32;
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        /* Emergency notice */
+        .emergency-notice {
+            background: linear-gradient(135deg, rgba(221, 33, 33, 0.1), rgba(255, 99, 99, 0.2));
+            border-left: 5px solid rgb(221, 33, 33);
+            padding: 1.5rem 2rem;
+            border-radius: 8px;
+            margin-bottom: 2.5rem;
+        }
+
+        .emergency-notice strong {
+            display: block;
+            color: rgb(221, 33, 33);
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Fact box */
+        .fact-box {
+            background: linear-gradient(135deg, rgba(46, 125, 50, 0.1), rgba(76, 175, 80, 0.2));
+            border-left: 5px solid #2e7d32;
+            padding: 1.5rem 2rem;
+            border-radius: 8px;
+            margin: 3rem 0;
+        }
+
+        .fact-box strong {
+            display: block;
+            color: #2e7d32;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 3rem 1.5rem 2rem;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, rgb(221, 33, 33), rgb(255, 99, 99));
+            color: #fff;
+            margin-top: 5rem;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 400;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 15px;
+            background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.5) 50%, rgba(255,255,255,0) 100%);
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        /* Back to Home button */
+        .back-button {
+            display: inline-block;
+            background: rgb(221, 33, 33);
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-top: 2rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+            text-decoration: none;
+        }
+
+        .back-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            text-decoration: none;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            header h1 {
+                font-size: 3rem;
+            }
+            
+            header p {
+                font-size: 1.2rem;
+            }
+            
+            h2 {
+                font-size: 2.2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 5rem 1rem 4rem;
+            }
+            
+            header h1 {
+                font-size: 2.5rem;
+            }
+
+            header p {
+                font-size: 1.1rem;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+
+            main {
+                padding: 2rem 1.5rem;
+            }
+            
+            .myth-content {
+                padding: 2rem 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 2.2rem;
+            }
+            
+            header p {
+                font-size: 1rem;
+            }
+            
+            h2 {
+                font-size: 1.8rem;
+            }
+            
+            .myth-card h3 {
+                font-size: 1.5rem;
+            }
+            
+            .myth-card p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Top Myths About Cardiovascular Disease</h1>
+        <p>Separating fact from fiction for better heart health</p>
+        <!-- Wave decoration -->
+        <svg class="header-decoration" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 100" preserveAspectRatio="none">
+            <path d="M0,0 C150,40 350,50 500,20 C650,0 750,40 900,80 C1050,120 1350,40 1440,30 L1440,100 L0,100 Z"></path>
+        </svg>
+    </header>
+
+    <main>
+        <!-- Floating decorative hearts -->
+        <svg class="floating-heart heart-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z" fill="#dd2121"/>
+        </svg>
+        <svg class="floating-heart heart-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z" fill="#dd2121"/>
+        </svg>
+        <svg class="floating-heart heart-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z" fill="#dd2121"/>
+        </svg>
+
+        <div class="emergency-notice">
+            <strong>Important:</strong> If you're experiencing chest pain or symptoms of a heart attack, call emergency services immediately. This information is educational and not a substitute for professional medical advice.
+        </div>
+
+        <a href="blogs" class="back-button">
+            <span class="back-icon">←</span> Back to blog
+        </a>
+
+        <h2>Common Myths About Heart Disease</h2>
+        
+        <div class="fact-box">
+            <strong>Did you know?</strong>
+            <p>Heart disease is the leading cause of death for both men and women in the United States. Understanding fact from fiction can help you take better care of your heart health.</p>
+        </div>
+
+        <div class="myth-card">
+            <div class="myth-content">
+                <span class="myth-tag">MYTH #1</span>
+                <h3>"I'd know if I had high blood pressure."</h3>
+                <p>Many people believe they would experience obvious symptoms if they had high blood pressure, but this is often not the case.</p>
+                <span class="fact-tag">FACT</span>
+                <p>High blood pressure is often called the "silent killer" because it typically has no symptoms. Many people with high blood pressure feel completely normal, which is why regular blood pressure checks are essential for everyone.</p>
+            </div>
+        </div>
+
+        <div class="myth-card">
+            <div class="myth-content">
+                <span class="myth-tag">MYTH #2</span>
+                <h3>"Heart disease runs in my family, so there's nothing I can do to prevent it."</h3>
+                <p>Some people believe that heredity determines heart health destiny.</p>
+                <span class="fact-tag">FACT</span>
+                <p>While family history does contribute to heart disease risk, it doesn't mean heart disease is inevitable. Even for those with a family history, lifestyle changes can significantly reduce risk. Regular exercise, healthy eating, not smoking, and managing conditions like high blood pressure can dramatically lower your chances of developing heart disease.</p>
+            </div>
+        </div>
+
+        <div class="myth-card">
+            <div class="myth-content">
+                <span class="myth-tag">MYTH #3</span>
+                <h3>"Heart disease only affects older people."</h3>
+                <p>Many younger adults dismiss heart health concerns, thinking they're protected by their age.</p>
+                <span class="fact-tag">FACT</span>
+                <p>While heart disease becomes more common with age, it can affect people of all ages, even those in their 20s and 30s. Poor diet, lack of exercise, smoking, and other factors can lead to heart problems at any age. Additionally, some congenital heart conditions can affect even the youngest individuals.</p>
+            </div>
+        </div>
+
+        <div class="myth-card">
+            <div class="myth-content">
+                <span class="myth-tag">MYTH #4</span>
+                <h3>"Heart disease affects mostly men."</h3>
+                <p>There's a widespread perception that heart disease is primarily a man's disease.</p>
+                <span class="fact-tag">FACT</span>
+                <p>Heart disease is the number one killer of both men and women in the United States. While men may experience heart attacks at a slightly younger age on average, women's risk increases significantly after menopause. Women may also experience different symptoms than men, which can lead to delayed treatment.</p>
+            </div>
+        </div>
+
+        <div class="myth-card">
+            <div class="myth-content">
+                <span class="myth-tag">MYTH #5</span>
+                <h3>"If you have heart disease, you should rest and avoid exercise."</h3>
+                <p>Some believe that exercise puts dangerous strain on the heart for those with heart conditions.</p>
+                <span class="fact-tag">FACT</span>
+                <p>Regular, appropriate exercise is beneficial for most people with heart disease. Physical activity strengthens the heart muscle, improves circulation, and helps control risk factors like high blood pressure and cholesterol levels. However, it's important to work with your healthcare provider to develop an exercise plan that's right for your specific condition.</p>
+            </div>
+        </div>
+
+        <div class="myth-card">
+            <div class="myth-content">
+                <span class="myth-tag">MYTH #6</span>
+                <h3>"I'm taking statins, so I can eat whatever I want."</h3>
+                <p>Some believe that cholesterol-lowering medications provide complete protection against heart disease.</p>
+                <span class="fact-tag">FACT</span>
+                <p>Medications like statins are important tools in managing heart disease risk, but they work best alongside healthy lifestyle choices. A heart-healthy diet low in saturated fats and rich in fruits, vegetables, and whole grains remains essential. Medications are not a substitute for healthy eating, regular exercise, and other heart-healthy habits.</p>
+            </div>
+        </div>
+
+        <div class="myth-card">
+            <div class="myth-content">
+                <span class="myth-tag">MYTH #7</span>
+                <h3>"Heart failure means the heart stops beating."</h3>
+                <p>Many people confuse heart failure with cardiac arrest or a heart attack.</p>
+                <span class="fact-tag">FACT</span>
+                <p>Heart failure does not mean the heart has stopped working. It means the heart isn't pumping as well as it should. The heart continues to beat but cannot meet the body's needs for blood and oxygen. Heart failure is a serious condition, but many people live active lives with proper treatment and management.</p>
+            </div>
+        </div>
+
+        <div class="myth-card">
+            <div class="myth-content">
+                <span class="myth-tag">MYTH #8</span>
+                <h3>"I have a pacemaker, so I no longer have to worry about my heart."</h3>
+                <p>Some believe that cardiac devices solve all heart problems.</p>
+                <span class="fact-tag">FACT</span>
+                <p>Pacemakers and other cardiac devices help manage specific heart rhythm issues, but they don't prevent or treat all forms of heart disease. If you have a pacemaker, it's still important to control risk factors, take prescribed medications, follow a heart-healthy lifestyle, and attend regular medical check-ups.</p>
+            </div>
+        </div>
+
+        <div class="myth-card">
+            <div class="myth-content">
+                <span class="myth-tag">MYTH #9</span>
+                <h3>"Heart attacks always cause chest pain."</h3>
+                <p>The classic clutching-chest-in-pain image of a heart attack is ingrained in popular culture.</p>
+                <span class="fact-tag">FACT</span>
+                <p>While chest pain is common during heart attacks, not everyone experiences it. Some people, particularly women, may have different symptoms like shortness of breath, nausea, lightheadedness, or pain in the jaw, neck, or back. Recognizing these less obvious signs is crucial for seeking timely medical attention.</p>
+            </div>
+        </div>
+
+        <div class="myth-card">
+            <div class="myth-content">
+                <span class="myth-tag">MYTH #10</span>
+                <h3>"Vitamins and supplements can prevent heart disease."</h3>
+                <p>Many people believe taking various supplements will protect their heart health.</p>
+                <span class="fact-tag">FACT</span>
+                <p>Scientific evidence doesn't support most vitamin or supplement claims for heart health. The best way to get heart-healthy nutrients is through a balanced diet rich in fruits, vegetables, whole grains, lean proteins, and healthy fats. Always consult with your healthcare provider before starting any supplement regimen.</p>
+            </div>
+        </div>
+
+        <div class="myth-card">
+            <div class="myth-content">
+                <span class="myth-tag">MYTH #11</span>
+                <h3>"If my cholesterol levels are normal, I don't need to worry about heart disease."</h3>
+                <p>Some believe that normal cholesterol levels guarantee heart health.</p>
+                <span class="fact-tag">FACT</span>
+                <p>While healthy cholesterol levels are important, they're just one factor among many that affect heart disease risk. Blood pressure, blood sugar levels, smoking status, physical activity, family history, and other factors all contribute to overall risk. A comprehensive approach to heart health addresses all risk factors, not just cholesterol.</p>
+            </div>
+        </div>
+
+        <div class="fact-box">
+            <strong>Remember:</strong>
+            <p>Heart disease is largely preventable. By understanding the facts and taking proactive steps to manage your risk factors, you can significantly improve your heart health and overall wellbeing. Always consult with healthcare professionals for personalized advice about your heart health.</p>
+        </div>
+    </main>
+
+    <script>
+        // GSAP Animations
+        gsap.from("header h1", {
+            opacity: 0,
+            y: -50,
+            duration: 1.2,
+            delay: 0.3,
+            ease: "power3.out",
+        });
+
+        gsap.from("header p", {
+            opacity: 0,
+            y: -30,
+            duration: 1.2,
+            delay: 0.6,
+            ease: "power3.out",
+        });
+
+        gsap.from(".emergency-notice", {
+            opacity: 0,
+            y: 30,
+            duration: 1,
+            delay: 1,
+            ease: "power3.out",
+        });
+
+        gsap.from("h2", {
+            opacity: 0,
+            y: -20,
+            duration: 1,
+            delay: 1,
+            stagger: 0.3,
+            ease: "power3.out",
+        });
+
+        gsap.from(".myth-card", {
+            opacity: 0,
+            y: 30,
+            duration: 1,
+            stagger: 0.15,
+            delay: 1.2,
+            ease: "power3.out",
+        });
+
+        gsap.from(".fact-box", {
+            opacity: 0,
+            y: 30,
+            duration: 1,
+            delay: 1.8,
+            ease: "power3.out",
+        });
+
+        gsap.from(".floating-heart", {
+            opacity: 0,
+            scale: 0,
+            duration: 1,
+            stagger: 0.3,
+            delay: 2,
+            ease: "elastic.out(1, 0.3)",
+        });
+        
+        // Animate the wave on scroll
+        window.addEventListener('scroll', function() {
+            let scrollPosition = window.scrollY;
+            if (scrollPosition < 500) {
+                gsap.to(".header-decoration", {
+                    y: 1 + (scrollPosition * 0.05),
+                    duration: 0.3,
+                    ease: "power1.out"
+                });
+            }
+        });
+    </script>
+</body>
+</html>
+{% endblock body %}
