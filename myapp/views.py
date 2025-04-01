@@ -46,6 +46,8 @@ def validate_password(password):
         return False
     return True
 
+# Login verification
+
 def signin(request):
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -162,3 +164,76 @@ def calculate_wpr(request):
 
     return render(request, "wpr_form.html", {"result": result})
 
+
+#lifestyle predict
+
+import os
+import joblib
+import numpy as np
+from django.shortcuts import render, redirect
+
+
+
+model_path = "myproject/ml_models/heart_attack_model.joblib"  # Update the path if needed
+ml_model = joblib.load(model_path)
+
+
+import joblib
+import numpy as np
+from django.shortcuts import render, redirect
+
+# Load the trained model and scaler
+model = joblib.load("myproject/ml_models/heart_attack_model.joblib")
+scaler = joblib.load("myproject/ml_models/scaler.joblib")
+
+def predict_heart_attack(request):
+    if request.method == "POST":
+        try:
+            # Extracting input data
+            age = float(request.POST.get("age"))
+            cholesterol = float(request.POST.get("cholesterol"))
+            blood_pressure = request.POST.get("blood_pressure")
+            heart_rate = float(request.POST.get("heart_rate"))
+            diabetes = int(request.POST.get("diabetes"))
+            family_history = int(request.POST.get("family_history"))
+            smoking = int(request.POST.get("smoking"))
+            obesity = int(request.POST.get("obesity"))
+            alcohol = int(request.POST.get("alcohol"))
+            exercise_hours = float(request.POST.get("exercise_hours"))
+            diet = int(request.POST.get("diet"))
+            previous_heart_problems = int(request.POST.get("previous_heart_problems"))
+            medication_use = int(request.POST.get("medication_use"))
+            stress_level = float(request.POST.get("stress_level"))
+            sedentary_hours = float(request.POST.get("sedentary_hours"))
+            bmi = float(request.POST.get("bmi"))
+            triglycerides = float(request.POST.get("triglycerides"))
+            physical_activity = int(request.POST.get("physical_activity"))
+            sleep_hours = float(request.POST.get("sleep_hours"))
+
+            # Convert blood pressure (sys/dia)
+            systolic, diastolic = map(float, blood_pressure.split("/"))
+
+            # Prepare input data as a numpy array
+            input_data = np.array([
+                age, cholesterol, systolic, diastolic, heart_rate, diabetes,
+                family_history, smoking, obesity, alcohol, exercise_hours, diet,
+                previous_heart_problems, medication_use, stress_level, sedentary_hours,
+                bmi, triglycerides, physical_activity, sleep_hours
+            ]).reshape(1, -1)
+
+            # Scale input data
+            input_data_scaled = scaler.transform(input_data)
+
+            # Make prediction
+            prediction = model.predict(input_data_scaled)
+
+            # Convert prediction to readable output
+            risk = "High" if prediction[0] == 1 else "Low"
+
+            # Redirect to results page with prediction data
+            return render(request, "result.html", {"risk": risk})
+
+        except Exception as e:
+            return render(request, "result.html", {"error": str(e)})
+
+    return render(request, "predict.html")

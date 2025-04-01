@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction Result</title>
+</head>
+<body>
+    <h2>Heart Attack Prediction Result</h2>
+    
+    {% if error %}
+        <p style="color: red;">Error: {{ error }}</p>
+    {% else %}
+        <h3>Your predicted heart attack risk is: <strong style="color: {% if risk == 'High' %}red{% else %}green{% endif %};">{{ risk }}</strong></h3>
+    {% endif %}
+
+    <br>
+    <a href="/">Go Back</a>
+</body>
+</html>

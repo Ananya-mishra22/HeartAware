@@ -34,5 +34,7 @@ urlpatterns = [
     path('recommendations',recommendations,name='recommendations'),
     path('2decho', predict_view, name='predict'),
     path('wpr_form', calculate_wpr, name='calculate_wpr'),
+    path("lifestyle", predict_heart_attack, name='lifestyle'),
+    path('predict/', predict_heart_attack, name='predict_lifestyle'),
 
 ]
