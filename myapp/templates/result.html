@@ -3,18 +3,518 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prediction Result</title>
+    <title>Heart Attack Risk Prediction - Result</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Playfair+Display:wght@400;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Poppins', Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f4f4; /* Slightly warm background */
+            color: #333;
+            overflow-x: hidden; /* Prevent horizontal scroll */
+        }
+
+        /* Enhanced Header */
+        header {
+            padding: 6rem 0 5rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, rgba(221, 33, 33, 0.9), rgba(255, 99, 99, 0.8));
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Animated heart beat pulse effect */
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 70%);
+            animation: heartbeat 2s infinite ease-in-out;
+            pointer-events: none;
+        }
+
+        @keyframes heartbeat {
+            0% { transform: scale(0.8); opacity: 0; }
+            50% { transform: scale(1.2); opacity: 0.3; }
+            100% { transform: scale(0.8); opacity: 0; }
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 3.5rem;
+            font-weight: 700;
+            font-family: 'Playfair Display', serif;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            position: relative;
+            letter-spacing: -0.5px;
+        }
+
+        header p {
+            margin: 1rem 0 0;
+            font-size: 1.4rem;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 400;
+            color: #fff;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Header decoration */
+        .header-decoration {
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            fill: #f8f4f4;
+            transform: translateY(1px);
+        }
+
+        /* Main Content */
+        main {
+            padding: 3rem 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        /* Floating heart decorations */
+        .floating-heart {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            opacity: 0.15;
+            z-index: -1;
+            animation: float 8s infinite ease-in-out;
+        }
+
+        .heart-1 {
+            top: 10%;
+            left: 5%;
+            animation-delay: 0s;
+            transform: rotate(-15deg);
+        }
+
+        .heart-2 {
+            top: 35%;
+            right: 7%;
+            animation-delay: 2s;
+            transform: rotate(20deg);
+        }
+
+        .heart-3 {
+            bottom: 15%;
+            left: 8%;
+            animation-delay: 4s;
+            transform: rotate(5deg);
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0) rotate(-15deg); }
+            50% { transform: translateY(-20px) rotate(0deg); }
+            100% { transform: translateY(0) rotate(-15deg); }
+        }
+
+        h2 {
+            color: rgb(221, 33, 33);
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            position: relative;
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+        }
+
+        h2::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(to right, rgba(221, 33, 33, 0.9), rgba(255, 99, 99, 0.8));
+            margin: 0.8rem auto 0;
+            border-radius: 2px;
+        }
+
+        /* Content card */
+        .content-card {
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+            padding: 2.5rem;
+            margin-bottom: 3rem;
+            position: relative;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .content-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+        }
+
+        /* Result card */
+        .result-card {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .result-icon {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+            animation: pulse 2s infinite ease-in-out;
+            display: inline-block;
+        }
+
+        .result-title {
+            font-size: 2.2rem;
+            color: rgb(221, 33, 33);
+            margin-bottom: 1.5rem;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .risk-display {
+            display: inline-block;
+            font-size: 2.5rem;
+            font-weight: 700;
+            padding: 0.8rem 2.5rem;
+            border-radius: 50px;
+            margin: 1rem 0 2rem;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .risk-high {
+            background: linear-gradient(135deg, rgba(221, 33, 33, 0.9), rgba(255, 99, 99, 0.8));
+            color: white;
+        }
+
+        .risk-moderate {
+            background: linear-gradient(135deg, rgba(255, 152, 0, 0.9), rgba(255, 193, 7, 0.8));
+            color: white;
+        }
+
+        .risk-low {
+            background: linear-gradient(135deg, rgba(46, 139, 87, 0.9), rgba(76, 175, 80, 0.8));
+            color: white;
+        }
+
+        .error-message {
+            background: linear-gradient(135deg, rgba(221, 33, 33, 0.1), rgba(255, 99, 99, 0.1));
+            border: 2px solid rgba(221, 33, 33, 0.3);
+            padding: 1.5rem;
+            border-radius: 10px;
+            color: rgb(221, 33, 33);
+            font-weight: 500;
+            text-align: center;
+            margin: 2rem auto;
+            max-width: 80%;
+        }
+
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: rgb(221, 33, 33);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: #f0f0f0;
+            color: #444;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn-icon {
+            margin-right: 0.5rem;
+        }
+
+        .result-details {
+            background: #f9f9f9;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            text-align: left;
+        }
+
+        .result-details h3 {
+            color: rgb(221, 33, 33);
+            font-size: 1.4rem;
+            margin-top: 0;
+            margin-bottom: 1rem;
+        }
+
+        .result-details ul {
+            padding-left: 1.5rem;
+        }
+
+        .result-details li {
+            margin-bottom: 0.5rem;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header {
+                padding: 5rem 1rem 4rem;
+            }
+            
+            header h1 {
+                font-size: 2.8rem;
+            }
+
+            header p {
+                font-size: 1.1rem;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+
+            main {
+                padding: 2rem 1.5rem;
+            }
+            
+            .content-card {
+                padding: 1.5rem;
+            }
+            
+            .risk-display {
+                font-size: 2rem;
+                padding: 0.7rem 2rem;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+                gap: 0.8rem;
+            }
+            
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .result-title {
+                font-size: 1.8rem;
+            }
+            
+            .risk-display {
+                font-size: 1.8rem;
+                padding: 0.6rem 1.8rem;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h2>Heart Attack Prediction Result</h2>
-    
-    {% if error %}
-        <p style="color: red;">Error: {{ error }}</p>
-    {% else %}
-        <h3>Your predicted heart attack risk is: <strong style="color: {% if risk == 'High' %}red{% else %}green{% endif %};">{{ risk }}</strong></h3>
-    {% endif %}
+    <header>
+        <h1>Heart Attack Risk Prediction</h1>
+        <p>Your personalized cardiac risk assessment results</p>
+        <!-- Wave decoration -->
+        <svg class="header-decoration" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 100" preserveAspectRatio="none">
+            <path d="M0,0 C150,40 350,50 500,20 C650,0 750,40 900,80 C1050,120 1350,40 1440,30 L1440,100 L0,100 Z" fill="#f8f4f4"></path>
+        </svg>
+    </header>
 
-    <br>
-    <a href="/">Go Back</a>
+    <main>
+        <!-- Floating decorative hearts -->
+        <svg class="floating-heart heart-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z" fill="#dd2121"/>
+        </svg>
+        <svg class="floating-heart heart-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z" fill="#dd2121"/>
+        </svg>
+        <svg class="floating-heart heart-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z" fill="#dd2121"/>
+        </svg>
+
+        <div class="content-card">
+            {% if error %}
+            <div class="result-card">
+                <div class="result-icon">⚠️</div>
+                <h2 class="result-title">Prediction Error</h2>
+                
+                <div class="error-message">
+                    {{ error }}
+                </div>
+                
+                <div class="action-buttons">
+                    <a href="/" class="btn btn-primary">
+                        <span class="btn-icon">←</span> Try Again
+                    </a>
+                </div>
+            </div>
+            {% else %}
+            <div class="result-card">
+                <div class="result-icon">❤️</div>
+                <h2 class="result-title">Your Heart Risk Assessment</h2>
+                
+                <div class="risk-display {% if risk == 'High' %}risk-high{% elif risk == 'Moderate' %}risk-moderate{% else %}risk-low{% endif %}">
+                    {{ risk }}
+                </div>
+                
+                <p>Based on the information you provided, our predictive model has calculated your heart attack risk level.</p>
+                
+                <div class="result-details">
+                    <h3>Understanding Your Results</h3>
+                    <ul>
+                        {% if risk == 'High' %}
+                        <li><strong>High Risk:</strong> Your profile suggests multiple significant risk factors for cardiovascular events.</li>
+                        <li>It is strongly recommended that you consult with a healthcare provider to discuss these results.</li>
+                        <li>Many risk factors can be modified through lifestyle changes and medical intervention.</li>
+                        {% elif risk == 'Moderate' %}
+                        <li><strong>Moderate Risk:</strong> Your profile shows some risk factors that may contribute to cardiovascular issues.</li>
+                        <li>Consider discussing these results with your healthcare provider during your next check-up.</li>
+                        <li>Focusing on lifestyle improvements can help reduce your risk level over time.</li>
+                        {% else %}
+                        <li><strong>Low Risk:</strong> Your profile indicates fewer risk factors for cardiovascular events.</li>
+                        <li>Continue maintaining your healthy habits to preserve your heart health.</li>
+                        <li>Regular check-ups are still important for monitoring your cardiovascular health.</li>
+                        {% endif %}
+                    </ul>
+                </div>
+                
+                <div class="action-buttons">
+                    <a href="/" class="btn btn-primary">
+                        <span class="btn-icon">←</span> Back to Assessment
+                    </a>
+                    <a href="/recommendations" class="btn btn-secondary">
+                        <span class="btn-icon">📋</span> Get Recommendations
+                    </a>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+
+        <div class="content-card">
+            <h2>Next Steps for Heart Health</h2>
+            
+            <p style="text-align: center;">This assessment is meant to be informative and educational. Always consult with healthcare professionals for medical advice.</p>
+            
+            <div class="result-details">
+                <h3>General Heart Health Recommendations</h3>
+                <ul>
+                    <li><strong>Regular Check-ups:</strong> Schedule routine health screenings to monitor cardiovascular indicators.</li>
+                    <li><strong>Balanced Diet:</strong> Focus on heart-healthy foods including fruits, vegetables, whole grains, and lean proteins.</li>
+                    <li><strong>Regular Exercise:</strong> Aim for at least 150 minutes of moderate exercise per week.</li>
+                    <li><strong>Stress Management:</strong> Practice stress-reduction techniques such as meditation, deep breathing, or yoga.</li>
+                    <li><strong>Adequate Sleep:</strong> Prioritize 7-8 hours of quality sleep per night.</li>
+                    <li><strong>Limit Alcohol:</strong> If you drink, do so in moderation.</li>
+                    <li><strong>Quit Smoking:</strong> If you smoke, seek resources to help you quit.</li>
+                </ul>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // GSAP Animations
+        gsap.from("header h1", {
+            opacity: 0,
+            y: -50,
+            duration: 1.2,
+            delay: 0.3,
+            ease: "power3.out",
+        });
+
+        gsap.from("header p", {
+            opacity: 0,
+            y: -30,
+            duration: 1.2,
+            delay: 0.6,
+            ease: "power3.out",
+        });
+
+        gsap.from(".content-card", {
+            opacity: 0,
+            y: 30,
+            duration: 1,
+            stagger: 0.3,
+            delay: 0.8,
+            ease: "power3.out",
+        });
+        
+        gsap.from(".result-icon", {
+            scale: 0.5,
+            opacity: 0,
+            duration: 1,
+            delay: 1.1,
+            ease: "elastic.out(1, 0.5)",
+        });
+        
+        gsap.from(".result-title", {
+            opacity: 0,
+            y: 20,
+            duration: 0.8,
+            delay: 1.3,
+            ease: "power2.out",
+        });
+        
+        gsap.from(".risk-display", {
+            opacity: 0,
+            scale: 0.8,
+            duration: 1,
+            delay: 1.5,
+            ease: "back.out(1.7)",
+        });
+        
+        gsap.from(".result-details", {
+            opacity: 0,
+            y: 20,
+            duration: 0.8,
+            delay: 1.7,
+            ease: "power2.out",
+        });
+        
+        gsap.from(".action-buttons .btn", {
+            opacity: 0,
+            y: 20,
+            duration: 0.8,
+            stagger: 0.2,
+            delay: 1.9,
+            ease: "power2.out",
+        });
+    </script>
 </body>
 </html>
