@@ -176,10 +176,3 @@ This system is designed for research and educational purposes only and should no
 
 Ananya Mishra, Kirti More, Rutuja Manore, Kinjal Paradkar
 
-Projects include:
-
-HeartAware – Cardiac Risk Prediction System
-
-AgroPredict – Crop Supply Prediction
-
-Online Auction Platform for Charitable Auctions
