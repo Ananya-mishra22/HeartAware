@@ -94,18 +94,26 @@ This helps transform raw ML predictions into clear medical insights.
 
 🛠️ Tech Stack
 Backend (Django & ML Integration): 
+
 Django (Python-based web framework) 
+
 TensorFlow/Keras (for CNN models) 
+
 Scikit-Learn (for classification model) 
+
 NumPy & Pandas (for data handling) 
 
 Frontend (Basic Web UI) 
+
 Database & Storage 
+
 SQLite (if small-scale or for prototyping) 
+
 Django ORM (for database interaction) 
 
 
 Cloud & IoT Integration 
+
 Google Cloud (IOT integration)
 
 📂 Project Structure
@@ -125,17 +133,29 @@ HeartAware/
 ├── results/                 # Model outputs and evaluation
 │
 └── README.md
+
 ⚙️ Installation
+
 1️⃣ Clone the repository
+
 git clone https://github.com/yourusername/HeartAware.git
+
 cd HeartAware
+
 2️⃣ Install dependencies
+
 pip install -r requirements.txt
+
 3️⃣ Run the backend
+
 python manage.py runserver
+
 4️⃣ Run the frontend
+
 npm install
+
 npm run dev
+
 📊 Model Evaluation
 
 🎯 Applications
@@ -152,10 +172,9 @@ AI-assisted clinical decision systems
 
 This system is designed for research and educational purposes only and should not replace professional medical diagnosis.
 
-👩‍💻 Author
+👩‍💻 Authors
 
-Ananya Mishra
-AIML Enthusiast | Machine Learning Developer | Web Developer
+Ananya Mishra, Kirti More, Rutuja Manore, Kinjal Paradkar
 
 Projects include:
 
